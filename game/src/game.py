@@ -36,12 +36,13 @@ class Game:
 
     def showTiles(self):
         for i in range(self.front, self.back):
-            pos = self.tiles[i].getPosition()
-            pygame.draw.rect(self.surface, 'white', (pos[0],pos[1],self.tiles[i].width, self.tiles[i].height))
+            tile = self.tiles[i]
+            pos = tile.getPosition()
+            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1],self.tiles[i].width, self.tiles[i].height))
 
     def showScore(self):
         score = self.font.render(f"Score: {SCORE}", True, "green")
-        self.surface.blit(score, ((const.SCREEN_WIDTH / 2) - (score.width / 2), 5))
+        self.surface.blit(score, ((const.SCREEN_WIDTH / 2) - (score.get_width() / 2), 5))
 
     def draw(self):
         self.showBg()
@@ -50,11 +51,11 @@ class Game:
         self.showScore()
       
 def initTiles():
-    return [entities.Tile(const.SPAWN_1, 1, "white"),
-            entities.Tile(const.SPAWN_2, 1, "white"),
-            entities.Tile(const.SPAWN_1, 1.4, "white"),
-            entities.Tile(const.SPAWN_4, 3, "white"),
-            entities.Tile(const.SPAWN_4, 2, "white"),
-            entities.Tile(const.SPAWN_3, 3, "white"),
-            entities.Tile(const.SPAWN_1, 2.5, "white")]
+    return [entities.Tile(const.SPAWN_1, 1, "green"),
+            entities.Tile(const.SPAWN_2, 10, "white"),
+            entities.Tile(const.SPAWN_1, 11, "white"),
+            entities.Tile(const.SPAWN_4, 12, "white"),
+            entities.Tile(const.SPAWN_4, 13, "green"),
+            entities.Tile(const.SPAWN_3, 14, "white"),
+            entities.Tile(const.SPAWN_1, 15, "white")]
 
