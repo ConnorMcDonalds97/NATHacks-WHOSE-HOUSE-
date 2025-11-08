@@ -1,16 +1,18 @@
 import pygame
 import const
 class Tile():
-    def __init__(self, posX, time, colour):
+    def __init__(self, posX, time, colour, duration = 0.18):
         self.isHit = False
         self.vel = pygame.Vector2(0,100)
         self.width = const.TILE_WIDTH
-        self.height = const.TILE_HEIGHT
+        self.height = const.TILE_HEIGHT * duration
 
         posY = const.SCREEN_HEIGHT - time * self.vel[1]
         
         self.pos = pygame.Vector2(posX,posY)
         self.colour = colour
+
+        self.duration = duration
 
     def __str__(self):
         return f"Pos: {self.pos}\nVel: {self.vel}\nWidth: {self.width}\nHeight: {self.height}"

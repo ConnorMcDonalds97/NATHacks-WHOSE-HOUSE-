@@ -16,15 +16,14 @@ def main():
     game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)))
     game.draw()
 
-    prevTime = time.time()
+    clock = pygame.time.Clock()
+
     dt = 0
     timer = 0
     while running:
         game.draw()
 
-        now = time.time()
-        dt = now - prevTime
-        prevTime = now
+        dt = clock.tick(60)/1000.0
 
         timer += dt
 
