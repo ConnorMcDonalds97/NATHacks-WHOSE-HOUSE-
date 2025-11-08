@@ -12,6 +12,7 @@ class Game:
         self.initTiles()
     def showBg(self):
         pygame.draw.rect(self.surface, 'black', self.bgRect)
+        print("hello")
 
     def showSensor(self):
         pygame.draw.rect(self.surface, 'red', self.sensor)

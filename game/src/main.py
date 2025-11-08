@@ -19,7 +19,9 @@ def main():
         game.showBg()
         game.showSensor()
         game.showTiles()
-      # pygame.draw.rect(screen, COLOURS["WHITE"], noteSensor)
+
+        for tile in game.tiles:
+            tile.updatePos(deltaTime)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

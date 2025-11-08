@@ -3,7 +3,7 @@ import pygame
 class Tile():
     def __init__(self, width, height, posX, posY):
         self.pos = pygame.Vector2(posX,posY)
-        self.vel = pygame.Vector2(0,0)
+        self.vel = pygame.Vector2(0,20)
         self.width = width
         self.height = height
 
@@ -34,7 +34,7 @@ class Tile():
     Updates position based on velocity * deltaTime
     '''
     def updatePos(self, deltaTime):
-        self.pox += self.vel * deltaTime
+        self.pos += self.vel * deltaTime
 
     # Getters
 
