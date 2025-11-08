@@ -11,5 +11,3 @@ class Tile():
         return (screenWidth)/2 - (self.width/2)
     
     def updatePos(self, x, y):
-        self.posX = x
-        self.posY = y
