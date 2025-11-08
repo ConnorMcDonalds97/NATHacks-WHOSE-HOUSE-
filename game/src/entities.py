@@ -2,6 +2,7 @@ import pygame
 import const
 class Tile():
     def __init__(self, posX, time, colour):
+        self.isHit = False
         self.vel = pygame.Vector2(0,100)
         self.width = const.TILE_WIDTH
         self.height = const.TILE_HEIGHT
@@ -36,6 +37,9 @@ class Tile():
     def setPosXToCentre(self, screenWidth):
         self.pos = pygame.Vector2((screenWidth / 2) - (self.width / 2), self.pos.y)
 
+    def setHit(self):
+        self.isHit = True
+
     '''
     Updates position based on velocity * deltaTime
     '''
@@ -58,6 +62,9 @@ class Tile():
     
     def getRectInfo(self):
         return (self.pos[0], self.pos[1], self.width, self.height)
+    
+    def checkHit(self):
+        return self.isHit
     
 def main():
     print("testing tile")
