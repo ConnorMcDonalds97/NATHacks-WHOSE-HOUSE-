@@ -34,12 +34,9 @@ class Game:
             pos = self.tiles[i].getPosition()
             pygame.draw.rect(self.surface, 'white', (pos[0],pos[1],self.tiles[i].width, self.tiles[i].height))
 
-
-
-            entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_1, -600, "white")]
     def showScore(self):
-        score = self.font.render(f"Score: {SCORE}", True, "white")
-        self.surface.blit(score, (0, 0))
+        score = self.font.render(f"Score: {SCORE}", True, "green")
+        self.surface.blit(score, ((const.SCREEN_WIDTH / 2) - (score.width / 2), 5))
 
     def draw(self):
         self.showBg()
@@ -54,4 +51,5 @@ def initTiles():
             entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_4, -300, "white"),
             entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_4, -400, "white"),
             entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_3, -500, "white"),
+            entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_1, -600, "white")]
 
