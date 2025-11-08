@@ -9,6 +9,7 @@ from game import Game
 def main():
     pygame.init()
 
+
     clock = pygame.time.Clock()
     
     running = True
@@ -19,9 +20,7 @@ def main():
     dt = 0
     timer = 0
     while running:
-        game.showBg()
-        game.showSensor()
-        game.showTiles()
+        game.draw()
 
         now = time.time()
         dt = now - prevTime
@@ -41,9 +40,6 @@ def main():
                     game.sensor.setColour("red")
             elif event.type == pygame.KEYUP:
                     game.sensor.setColour("white")
-        game.showSensor()
-                
-
         pygame.display.update()
 
     pygame.quit()

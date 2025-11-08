@@ -1,13 +1,14 @@
 import pygame
 import const
 import entities
+
+SCORE = 0
 class Game:
     def __init__(self, surface):
         self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
         self.surface = surface
-
         self.sensor = entities.Tile(const.SCREEN_WIDTH, const.SENSOR_HEIGHT, 0, const.SENSOR_Y, 'white')
-
+        self.font = pygame.font.Font('freesansbold.ttf', 32)
         self.tiles = initTiles()
         self.tileCount = len(self.tiles)
         self.front = 0
@@ -21,7 +22,7 @@ class Game:
                 self.back += 1
             else:
                 break
-    
+
     def showBg(self):
         pygame.draw.rect(self.surface, 'black', self.bgRect)
         
@@ -33,6 +34,19 @@ class Game:
             pos = self.tiles[i].getPosition()
             pygame.draw.rect(self.surface, 'white', (pos[0],pos[1],self.tiles[i].width, self.tiles[i].height))
 
+
+
+            entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_1, -600, "white")]
+    def showScore(self):
+        score = self.font.render(f"Score: {SCORE}", True, "white")
+        self.surface.blit(score, (0, 0))
+
+    def draw(self):
+        self.showBg()
+        self.showTiles()
+        self.showSensor()
+        self.showScore()
+      
 def initTiles():
     return [entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_1, 0, "white"),
             entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_2, -100, "white"),
@@ -40,4 +54,4 @@ def initTiles():
             entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_4, -300, "white"),
             entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_4, -400, "white"),
             entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_3, -500, "white"),
-            entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_1, -600, "white")]
+
