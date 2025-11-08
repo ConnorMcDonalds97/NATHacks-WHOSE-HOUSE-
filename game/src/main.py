@@ -42,10 +42,26 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    game.sensor.setColour("red")
+                if event.key == pygame.K_1:
+                    game.sensor1.setColour('white')
+                if event.key == pygame.K_2:
+                    game.sensor2.setColour('white')
+                if event.key == pygame.K_3:
+                    game.sensor3.setColour('white')
+                if event.key == pygame.K_4:
+                    game.sensor4.setColour('white')
+                    # game.sensor.setColour("red")
             elif event.type == pygame.KEYUP:
-                    game.sensor.setColour("white")
+                if event.key == pygame.K_1:
+                    game.sensor1.setColour('red')
+                if event.key == pygame.K_2:
+                    game.sensor2.setColour('green')
+                if event.key == pygame.K_3:
+                    game.sensor3.setColour('orange')
+                if event.key == pygame.K_4:
+                    game.sensor4.setColour('blue')
+
+                    # game.sensor.setColour("white")
         pygame.display.update()
 
     pygame.quit()
