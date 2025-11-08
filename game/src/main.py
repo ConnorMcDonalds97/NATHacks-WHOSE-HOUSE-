@@ -8,6 +8,7 @@ from game import Game
 def main():
     pygame.init()
 
+
     clock = pygame.time.Clock()
     running = True
 
@@ -29,7 +30,6 @@ def main():
                     game.sensor.setColour("red")
             elif event.type == pygame.KEYUP:
                     game.sensor.setColour("white")
-                    
         game.draw()
 
         pygame.display.update()
