@@ -43,23 +43,23 @@ def main():
                 running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
-                    game.sensor1.setColour('white')
+                    game.sensor1.setColour(const.WHITE)
                 if event.key == pygame.K_2:
-                    game.sensor2.setColour('white')
+                    game.sensor2.setColour(const.WHITE)
                 if event.key == pygame.K_3:
-                    game.sensor3.setColour('white')
+                    game.sensor3.setColour(const.WHITE)
                 if event.key == pygame.K_4:
-                    game.sensor4.setColour('white')
+                    game.sensor4.setColour(const.WHITE)
                     # game.sensor.setColour("red")
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_1:
-                    game.sensor1.setColour('red')
+                    game.sensor1.setColour(const.RED)
                 if event.key == pygame.K_2:
-                    game.sensor2.setColour('green')
+                    game.sensor2.setColour(const.GREEN)
                 if event.key == pygame.K_3:
-                    game.sensor3.setColour('orange')
+                    game.sensor3.setColour(const.ORANGE)
                 if event.key == pygame.K_4:
-                    game.sensor4.setColour('blue')
+                    game.sensor4.setColour(const.BLUE)
 
                     # game.sensor.setColour("white")
         pygame.display.update()
