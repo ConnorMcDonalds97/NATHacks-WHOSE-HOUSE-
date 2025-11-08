@@ -1,7 +1,7 @@
 import pygame
 import const
 import entities
-
+from song_processing import get_beats
 class Game:
     def __init__(self, surface):
         self.score = 0
