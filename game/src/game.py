@@ -41,7 +41,7 @@ class Game:
                 break
 
     def showBg(self):
-        pygame.draw.rect(self.surface, 'black', self.bgRect)
+        pygame.draw.rect(self.surface, 'grey', self.bgRect)
         
     def showSensor(self):
         pygame.draw.rect(self.surface, self.sensor1.colour, self.sensor1.getRectInfo())
