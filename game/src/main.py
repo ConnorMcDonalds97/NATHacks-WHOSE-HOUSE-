@@ -37,9 +37,11 @@ def main():
                 running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    game.sensor.setColour("red")
+                    pass
+                    # game.sensor.setColour("red")
             elif event.type == pygame.KEYUP:
-                    game.sensor.setColour("white")
+                pass
+                    # game.sensor.setColour("white")
         pygame.display.update()
 
     pygame.quit()

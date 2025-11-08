@@ -8,11 +8,23 @@ class Game:
         self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
         self.surface = surface
 
-        self.sensor = entities.Tile(0, 0, 'white')
-        self.sensor.setDimensions(const.SCREEN_WIDTH, const.SENSOR_HEIGHT)
-        self.sensor.setPosition(0, const.SENSOR_Y)
-        
-        
+        self.sensor1 = entities.Tile(0,0,'red')
+        self.sensor2 = entities.Tile(0,0,'green')
+        self.sensor3 = entities.Tile(0,0,'orange')
+        self.sensor4 = entities.Tile(0,0,'blue')
+
+
+        self.sensor1.setDimensions(const.SENSOR_WIDTH, const.SENSOR_HEIGHT)
+        self.sensor2.setDimensions(const.SENSOR_WIDTH, const.SENSOR_HEIGHT)
+        self.sensor3.setDimensions(const.SENSOR_WIDTH, const.SENSOR_HEIGHT)
+        self.sensor4.setDimensions(const.SENSOR_WIDTH, const.SENSOR_HEIGHT)
+
+        self.sensor1.setPosition(const.SENSOR_OFFSET_LEFT, const.SENSOR_Y)
+        self.sensor2.setPosition(const.SENSOR_OFFSET_LEFT + const.SENSOR_WIDTH * 1, const.SENSOR_Y)
+        self.sensor3.setPosition(const.SENSOR_OFFSET_LEFT + const.SENSOR_WIDTH * 2, const.SENSOR_Y)
+        self.sensor4.setPosition(const.SENSOR_OFFSET_LEFT + const.SENSOR_WIDTH * 3, const.SENSOR_Y)
+
+
         self.font = pygame.font.Font('freesansbold.ttf', 32)
         self.tiles = initTiles()
         self.tileCount = len(self.tiles)
@@ -32,7 +44,11 @@ class Game:
         pygame.draw.rect(self.surface, 'black', self.bgRect)
         
     def showSensor(self):
-        pygame.draw.rect(self.surface, self.sensor.colour, self.sensor.getRectInfo())
+        pygame.draw.rect(self.surface, self.sensor1.colour, self.sensor1.getRectInfo())
+        pygame.draw.rect(self.surface, self.sensor2.colour, self.sensor2.getRectInfo())
+        pygame.draw.rect(self.surface, self.sensor3.colour, self.sensor3.getRectInfo())
+        pygame.draw.rect(self.surface, self.sensor4.colour, self.sensor4.getRectInfo())
+
 
     def showTiles(self):
         for i in range(self.front, self.back):
