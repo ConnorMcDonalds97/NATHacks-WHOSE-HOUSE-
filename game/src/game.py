@@ -78,6 +78,7 @@ class Game:
         for tile in self.tiles1:
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
+        
         for tile in self.tiles2:
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
@@ -99,15 +100,16 @@ class Game:
         self.showScore()
       
     def initTiles(self):
-        data1 = [5,7,8,10,12]
-        data2 = [4,6,8,9,11]
-        data3 = [6,7,8,9]
-        data4 = [3,5,6,8,10,12]
-        for d in data1:
-            self.tiles1.append(entities.Tile(const.SPAWN_1, d, const.LIGHT_RED))
-        for d in data2:
-            self.tiles2.append(entities.Tile(const.SPAWN_2, d, const.LIGHT_GREEN))
-        for d in data3:
-            self.tiles3.append(entities.Tile(const.SPAWN_3, d, const.LIGHT_ORANGE))
-        for d in data4:
-            self.tiles4.append(entities.Tile(const.SPAWN_4, d, const.LIGHT_BLUE))
+        data = get_beats.return_keys_assignments_and_populate_json("Bohemian Rhapsody", 1, 4, -1)
+
+        #data = [[{'start_time': 15.384599999999999, 'duration': 0.4166662499999987}],[{'start_time': 15.384599999999999, 'duration': 0.4166662499999987}],[{'start_time': 15.384599999999999, 'duration': 0.4166662499999987}],[{'start_time': 15.384599999999999, 'duration': 0.4166662499999987}]]
+        for i in range(4):
+            for d in data[i]:
+                if i == 0:
+                    self.tiles1.append(entities.Tile(const.SPAWN_1, d["start_time"] + 0.5 * d["duration"], const.LIGHT_RED, d['duration']))
+                if i == 1:
+                    self.tiles2.append(entities.Tile(const.SPAWN_2, d["start_time"] + 0.5 * d["duration"], const.LIGHT_GREEN, d['duration']))
+                if i == 2:
+                    self.tiles3.append(entities.Tile(const.SPAWN_3, d["start_time"] + 0.5 * d["duration"], const.LIGHT_ORANGE, d['duration']))
+                if i == 3:
+                    self.tiles4.append(entities.Tile(const.SPAWN_4, d["start_time"] + 0.5 * d["duration"], const.LIGHT_BLUE, d['duration']))
