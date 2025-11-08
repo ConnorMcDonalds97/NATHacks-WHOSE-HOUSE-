@@ -50,7 +50,7 @@ def get_pitch_categories(mode, n):
             })
 
 
-    if mode ==0: #metronome, sort randomly!
+    if mode ==0: #tempo, sort randomly!
         for beat in BEATS:
             idx=random.randint(0,n-1)
             beats_assignments[idx].append({

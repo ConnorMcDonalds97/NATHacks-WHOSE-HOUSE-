@@ -96,10 +96,10 @@ def return_beat_timestamps(song_name, beat_type, num_sensors=4, instrument=-1):
 
     midi_data = pretty_midi.PrettyMIDI(midifile)
     match beat_type:
-        case 'melody':
+        case 1: #melody
             get_midi_melody(midi_data=midi_data, instrument_idx=instrument) #writes to JSON
-        case 'metronome':
+        case 0: #tempo
             get_midi_tempo(mididata=midi_data)
 
 if __name__ == "__main__":
-    return_beat_timestamps(song_name= NGGYU, beat_type='melody', num_sensors=4, instrument=-1)
+    return_beat_timestamps(song_name= NGGYU, beat_type=1, num_sensors=4, instrument=-1)
