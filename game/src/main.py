@@ -10,11 +10,11 @@ def main():
     pygame.init()
 
 
-    clock = pygame.time.Clock()
     
     running = True
 
     game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)))
+    game.draw()
 
     prevTime = time.time()
     dt = 0
@@ -28,9 +28,15 @@ def main():
 
         timer += dt
 
-        for tile in game.tiles:
+        for tile in game.tiles1:
             tile.updatePos(dt)
-        game.setBack()
+        for tile in game.tiles2:
+            tile.updatePos(dt)
+        for tile in game.tiles3:
+            tile.updatePos(dt)
+        for tile in game.tiles4:
+            tile.updatePos(dt)
+       
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

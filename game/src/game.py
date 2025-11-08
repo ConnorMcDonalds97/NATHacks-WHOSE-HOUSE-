@@ -14,20 +14,13 @@ class Game:
         
         
         self.font = pygame.font.Font('freesansbold.ttf', 32)
-        self.tiles = initTiles()
-        self.tileCount = len(self.tiles)
-        self.front = 0
-        self.back = 0
-        self.setBack()
-    
-    def setBack(self):
-        
-        while self.back < self.tileCount:
-            if self.tiles[self.back].pos[1] + const.TILE_HEIGHT > -10:
-                self.back += 1
-            else:
-                break
 
+        self.tiles1 = []
+        self.tiles2 = []
+        self.tiles3 = []
+        self.tiles4 = []
+        self.initTiles()
+    
     def showBg(self):
         pygame.draw.rect(self.surface, 'black', self.bgRect)
         
@@ -35,10 +28,18 @@ class Game:
         pygame.draw.rect(self.surface, self.sensor.colour, self.sensor.getRectInfo())
 
     def showTiles(self):
-        for i in range(self.front, self.back):
-            tile = self.tiles[i]
+        for tile in self.tiles1:
             pos = tile.getPosition()
-            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1],self.tiles[i].width, self.tiles[i].height))
+            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
+        for tile in self.tiles2:
+            pos = tile.getPosition()
+            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
+        for tile in self.tiles3:
+            pos = tile.getPosition()
+            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
+        for tile in self.tiles4:
+            pos = tile.getPosition()
+            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
 
     def showScore(self):
         score = self.font.render(f"Score: {SCORE}", True, "green")
@@ -50,12 +51,17 @@ class Game:
         self.showSensor()
         self.showScore()
       
-def initTiles():
-    return [entities.Tile(const.SPAWN_1, 1, "green"),
-            entities.Tile(const.SPAWN_2, 10, "white"),
-            entities.Tile(const.SPAWN_1, 11, "white"),
-            entities.Tile(const.SPAWN_4, 12, "white"),
-            entities.Tile(const.SPAWN_4, 13, "green"),
-            entities.Tile(const.SPAWN_3, 14, "white"),
-            entities.Tile(const.SPAWN_1, 15, "white")]
+    def initTiles(self):
+        data1 = [5,7,8,10,12]
+        data2 = [4,6,8,9,11]
+        data3 = [6,7,8,9]
+        data4 = [3,5,6,8,10,12]
+        for d in data1:
+            self.tiles1.append(entities.Tile(const.SPAWN_1, d, const.LIGHT_RED))
+        for d in data2:
+            self.tiles2.append(entities.Tile(const.SPAWN_2, d, const.LIGHT_GREEN))
+        for d in data3:
+            self.tiles3.append(entities.Tile(const.SPAWN_3, d, const.LIGHT_YELLOW))
+        for d in data4:
+            self.tiles4.append(entities.Tile(const.SPAWN_4, d, const.LIGHT_BLUE))
 
