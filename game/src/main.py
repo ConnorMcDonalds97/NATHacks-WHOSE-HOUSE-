@@ -11,7 +11,7 @@ def main():
     clock = pygame.time.Clock()
     running = True
 
-    game = Game(pygame.display.set_mode((const.WIDTH, const.HEIGHT)))
+    game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)))
 
     while running:
         # clock.tick returns milliseconds

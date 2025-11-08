@@ -3,11 +3,10 @@ import const
 import entities
 class Game:
     def __init__(self, surface):
-        self.bgRect = (0,0, const.WIDTH, const.HEIGHT) #x,y,width,height
+        self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
         self.surface = surface
 
-        
-        self.sensor = (0,920, const.WIDTH, 5)
+        self.sensor = (0,920, const.SCREEN_WIDTH, 5)
 
         self.tiles = []
         self.initTiles()
@@ -23,4 +22,4 @@ class Game:
             pygame.draw.rect(self.surface, 'white', (pos[0],pos[1],tile.width, tile.height))
 
     def initTiles(self):
-        self.tiles = [entities.Tile(70,10,100,100)]
+        self.tiles = [entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SCREEN_WIDTH/2, 0)]
