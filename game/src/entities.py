@@ -17,7 +17,6 @@ class Tile():
 
 
     # Setters
-
     def setColour(self, colour):
         self.colour = colour
 
