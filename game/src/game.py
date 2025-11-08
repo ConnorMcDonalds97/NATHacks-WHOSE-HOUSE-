@@ -8,10 +8,10 @@ class Game:
         self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
         self.surface = surface
 
-        self.sensor1 = entities.Tile(0,0,'red')
-        self.sensor2 = entities.Tile(0,0,'green')
-        self.sensor3 = entities.Tile(0,0,'orange')
-        self.sensor4 = entities.Tile(0,0,'blue')
+        self.sensor1 = entities.Tile(0,0, const.RED)
+        self.sensor2 = entities.Tile(0,0, const.GREEN)
+        self.sensor3 = entities.Tile(0,0, const.ORANGE)
+        self.sensor4 = entities.Tile(0,0, const.BLUE)
 
 
         self.sensor1.setDimensions(const.SENSOR_WIDTH, const.SENSOR_HEIGHT)
@@ -34,7 +34,7 @@ class Game:
         self.initTiles()
     
     def showBg(self):
-        pygame.draw.rect(self.surface, 'grey', self.bgRect)
+        pygame.draw.rect(self.surface, const.GREY, self.bgRect)
         
     def showSensor(self):
         pygame.draw.rect(self.surface, self.sensor1.colour, self.sensor1.getRectInfo())
@@ -58,7 +58,7 @@ class Game:
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
 
     def showScore(self):
-        score = self.font.render(f"Score: {SCORE}", True, "green")
+        score = self.font.render(f"Score: {SCORE}", True, const.GREEN)
         self.surface.blit(score, ((const.SCREEN_WIDTH / 2) - (score.get_width() / 2), 5))
 
     def draw(self):
@@ -77,7 +77,7 @@ class Game:
         for d in data2:
             self.tiles2.append(entities.Tile(const.SPAWN_2, d, const.LIGHT_GREEN))
         for d in data3:
-            self.tiles3.append(entities.Tile(const.SPAWN_3, d, const.LIGHT_YELLOW))
+            self.tiles3.append(entities.Tile(const.SPAWN_3, d, const.LIGHT_ORANGE))
         for d in data4:
             self.tiles4.append(entities.Tile(const.SPAWN_4, d, const.LIGHT_BLUE))
 
