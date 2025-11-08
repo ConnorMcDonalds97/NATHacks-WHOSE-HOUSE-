@@ -7,7 +7,12 @@ class Game:
     def __init__(self, surface):
         self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
         self.surface = surface
-        self.sensor = entities.Tile(const.SCREEN_WIDTH, const.SENSOR_HEIGHT, 0, const.SENSOR_Y, 'white')
+
+        self.sensor = entities.Tile(0, 0, 'white')
+        self.sensor.setDimensions(const.SCREEN_WIDTH, const.SENSOR_HEIGHT)
+        self.sensor.setPosition(0, const.SENSOR_Y)
+        
+        
         self.font = pygame.font.Font('freesansbold.ttf', 32)
         self.tiles = initTiles()
         self.tileCount = len(self.tiles)
@@ -45,11 +50,11 @@ class Game:
         self.showScore()
       
 def initTiles():
-    return [entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_1, 0, "white"),
-            entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_2, -100, "white"),
-            entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_1, -200, "white"),
-            entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_4, -300, "white"),
-            entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_4, -400, "white"),
-            entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_3, -500, "white"),
-            entities.Tile(const.TILE_WIDTH,const.TILE_HEIGHT, const.SPAWN_1, -600, "white")]
+    return [entities.Tile(const.SPAWN_1, 1, "white"),
+            entities.Tile(const.SPAWN_2, 1, "white"),
+            entities.Tile(const.SPAWN_1, 1.4, "white"),
+            entities.Tile(const.SPAWN_4, 3, "white"),
+            entities.Tile(const.SPAWN_4, 2, "white"),
+            entities.Tile(const.SPAWN_3, 3, "white"),
+            entities.Tile(const.SPAWN_1, 2.5, "white")]
 
