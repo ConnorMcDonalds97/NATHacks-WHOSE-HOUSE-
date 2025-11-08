@@ -12,9 +12,11 @@ class Tile():
 
     def calculateCentreScreenX(self, screenWidth):
         return (screenWidth)/2 - (self.width/2)
+    
+
 
     # Setters
-    
+
     def setVelocity(self, x: float, y: float):
         self.vel = pygame.Vector2(x,y)
 
@@ -24,6 +26,10 @@ class Tile():
     def setDimensions(self, width: int, height: int):
         self.width = width
         self.height = height
+
+    def setPosXToCentre(self, screenWidth):
+        self.pos = pygame.Vector2((screenWidth / 2) - (self.width / 2), self.pos.y)
+
     '''
     Updates position based on velocity * deltaTime
     '''
