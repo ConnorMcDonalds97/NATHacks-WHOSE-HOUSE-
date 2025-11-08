@@ -1,8 +1,8 @@
 import pygame
 
 class Tile():
-    def __init__(self, width, height):
-        self.pos = pygame.Vector2(0,0)
+    def __init__(self, width, height, x, y):
+        self.pos = pygame.Vector2(x,y)
         self.vel = pygame.Vector2(0,0)
         self.width = width
         self.height = height
