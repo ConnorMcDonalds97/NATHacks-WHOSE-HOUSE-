@@ -16,10 +16,6 @@ def main():
     while running:
         # clock.tick returns milliseconds
         deltaTime = clock.tick(60) / 1000.0
-        
-        game.showBg()
-        game.showSensor()
-        game.showTiles()
 
         for tile in game.tiles:
             # print(tile)
@@ -33,8 +29,8 @@ def main():
                     game.sensor.setColour("red")
             elif event.type == pygame.KEYUP:
                     game.sensor.setColour("white")
-        game.showSensor()
-                
+                    
+        game.draw()
 
         pygame.display.update()
 
