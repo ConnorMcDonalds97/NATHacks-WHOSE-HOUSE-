@@ -1,11 +1,12 @@
 import pygame
 
 class Tile():
-    def __init__(self, width, height, posX, posY):
+    def __init__(self, width, height, posX, posY, colour):
         self.pos = pygame.Vector2(posX,posY)
         self.vel = pygame.Vector2(0,100)
         self.width = width
         self.height = height
+        self.colour = colour
 
     def __str__(self):
         return f"Pos: {self.pos}\nVel: {self.vel}\nWidth: {self.width}\nHeight: {self.height}"
@@ -16,6 +17,9 @@ class Tile():
 
 
     # Setters
+
+    def setColour(self, colour):
+        self.colour = colour
 
     def setVelocity(self, x: float, y: float):
         self.vel = pygame.Vector2(x,y)
@@ -38,6 +42,9 @@ class Tile():
 
     # Getters
 
+    def getColour(self):
+        return self.colour
+
     def getVelocity(self):
         return self.vel
     
@@ -46,6 +53,9 @@ class Tile():
     
     def getDimensions(self):
         return (self.width, self.height)
+    
+    def getRectInfo(self):
+        return tuple(self.pos[0], self.pos[1], self.width, self.height)
     
 def main():
     print("testing tile")

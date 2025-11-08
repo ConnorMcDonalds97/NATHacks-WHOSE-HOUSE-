@@ -18,7 +18,7 @@ def main():
         deltaTime = clock.tick(60) / 1000.0
         
         game.showBg()
-        game.showSensor()
+        game.showSensor(game.sensorSmall, 'red')
         game.showTiles()
 
         for tile in game.tiles:
@@ -28,6 +28,11 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    game.showSensor(game.sensorBig, 'white')
+            elif event.type == pygame.KEYUP:
+                pass
 
         pygame.display.update()
 

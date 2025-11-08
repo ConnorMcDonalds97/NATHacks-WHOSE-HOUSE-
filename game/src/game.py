@@ -6,16 +6,15 @@ class Game:
         self.bgRect = (0,0, const.WIDTH, const.HEIGHT) #x,y,width,height
         self.surface = surface
 
-        
-        self.sensor = (0,920, const.WIDTH, 5)
+        self.sensor = entities.Tile(const.WIDTH, 5, 0, 920, 'white')
 
         self.tiles = []
         self.initTiles()
     def showBg(self):
         pygame.draw.rect(self.surface, 'black', self.bgRect)
         
-    def showSensor(self):
-        pygame.draw.rect(self.surface, 'red', self.sensor)
+    def showSensor(self, colour):
+        pygame.draw.rect(self.surface, self.sensor.colour, self.sensor.getRectInfo())
 
     def showTiles(self):
         for tile in self.tiles:
