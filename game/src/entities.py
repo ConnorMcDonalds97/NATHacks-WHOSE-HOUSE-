@@ -55,7 +55,7 @@ class Tile():
         return (self.width, self.height)
     
     def getRectInfo(self):
-        return tuple(self.pos[0], self.pos[1], self.width, self.height)
+        return (self.pos[0], self.pos[1], self.width, self.height)
     
 def main():
     print("testing tile")
