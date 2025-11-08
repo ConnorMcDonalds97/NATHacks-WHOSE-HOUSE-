@@ -23,15 +23,15 @@ import pretty_midi
 NGGYU = "Never Gonna Give You Up"
 BR = "Bohemian Rhapsody"
 
-with open("general_midi_instruments.json") as f:
+with open("../../song_processing/general_midi_instruments.json") as f:
     GM_PROGRAMS = json.load(f)
 
-with open("songs.json") as f:
+with open("../../song_processing/songs.json") as f:
     SONGS = json.load(f)
 
 
 SAVE_WAV_TO_FOLDER = './'
-BEATS_DATA_JSON = "beats_data.json"
+BEATS_DATA_JSON = "../../song_processing/beats_data.json"
 
 def midi_to_wav(midifile, wavfile, save_to_folder=SAVE_WAV_TO_FOLDER):
     fs= FluidSynth()

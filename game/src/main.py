@@ -5,11 +5,11 @@ import time
 
 from game import Game
 
+from midi2audio import FluidSynth
+
 
 def main():
     pygame.init()
-
-
     
     running = True
 

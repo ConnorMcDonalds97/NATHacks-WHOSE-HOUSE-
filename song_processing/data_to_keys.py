@@ -20,7 +20,7 @@ def get_pitch_categories(mode, n):
     mode == 0: metronome
     mode == 1: melody
     '''
-    with open("beats_data.json") as f:
+    with open("../../song_processing/beats_data.json") as f:
         BEATS = json.load(f)
 
     beats_assignments = [] #assign the beats to the keys 
