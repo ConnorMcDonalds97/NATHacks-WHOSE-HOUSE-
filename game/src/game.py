@@ -2,9 +2,10 @@ import pygame
 import const
 import entities
 
-SCORE = 0
 class Game:
     def __init__(self, surface):
+        self.score = 0
+
         self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
         self.surface = surface
 
@@ -32,6 +33,36 @@ class Game:
         self.tiles3 = []
         self.tiles4 = []
         self.initTiles()
+
+    def checkTile(self, tile, sensorNum):
+        if (tile.getPosition()[1] <= const.SENSOR_Y + 10) and ((tile.getPosition()[1] + tile.getDimensions()[1]) >= const.SENSOR_Y):
+            if not tile.checkHit():
+                tile.setHit()
+                print(f"hit {sensorNum}")
+                self.score += 1
+            return True
+        return False
+
+
+    def checkSensor(self, sensorNum):
+        print(f"checking {sensorNum}")
+        match sensorNum:
+            case 1:
+                for tile in self.tiles1:
+                    if self.checkTile(tile, 1):
+                        break
+            case 2:
+                for tile in self.tiles2:
+                    if self.checkTile(tile, 2):
+                        break
+            case 3:
+                for tile in self.tiles3:
+                    if self.checkTile(tile, 3):
+                        break
+            case 4:
+                for tile in self.tiles4:
+                    if self.checkTile(tile, 4):
+                        break
     
     def showBg(self):
         pygame.draw.rect(self.surface, const.GREY, self.bgRect)
@@ -58,7 +89,7 @@ class Game:
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
 
     def showScore(self):
-        score = self.font.render(f"Score: {SCORE}", True, const.GREEN)
+        score = self.font.render(f"Score: {self.score}", True, const.GREEN)
         self.surface.blit(score, ((const.SCREEN_WIDTH / 2) - (score.get_width() / 2), 5))
 
     def draw(self):
@@ -80,4 +111,3 @@ class Game:
             self.tiles3.append(entities.Tile(const.SPAWN_3, d, const.LIGHT_ORANGE))
         for d in data4:
             self.tiles4.append(entities.Tile(const.SPAWN_4, d, const.LIGHT_BLUE))
-

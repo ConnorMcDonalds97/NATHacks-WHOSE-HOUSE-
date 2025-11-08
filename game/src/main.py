@@ -44,12 +44,16 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
                     game.sensor1.setColour(const.WHITE)
+                    game.checkSensor(1)
                 if event.key == pygame.K_2:
                     game.sensor2.setColour(const.WHITE)
+                    game.checkSensor(2)
                 if event.key == pygame.K_3:
                     game.sensor3.setColour(const.WHITE)
+                    game.checkSensor(3)
                 if event.key == pygame.K_4:
                     game.sensor4.setColour(const.WHITE)
+                    game.checkSensor(4)
                     # game.sensor.setColour("red")
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_1:
