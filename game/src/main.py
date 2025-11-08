@@ -18,7 +18,6 @@ def main():
 
     clock = pygame.time.Clock()
 
-    prevTime = time.time()
     dt = 0
     timer = 0
     while running:
