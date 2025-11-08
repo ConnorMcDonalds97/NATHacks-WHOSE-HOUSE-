@@ -1,9 +1,9 @@
 {
     "Bohemian Rhapsody": {
-        "title": "../../midi_songs/Queen - Bohemian Rhapsody"
+        "title": "./midi_songs/Queen - Bohemian Rhapsody"
     },
     "Never Gonna Give You Up": {
-        "title": "../../midi_songs/Never-Gonna-Give-You-Up-3"
+        "title": "./midi_songs/Never-Gonna-Give-You-Up-3"
     } 
 }
 
