@@ -3,7 +3,7 @@ import pygame
 class Tile():
     def __init__(self, width, height, posX, posY):
         self.pos = pygame.Vector2(posX,posY)
-        self.vel = pygame.Vector2(0,20)
+        self.vel = pygame.Vector2(0,100)
         self.width = width
         self.height = height
 
