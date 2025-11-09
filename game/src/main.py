@@ -6,13 +6,14 @@ from game import Game
 from midi2audio import FluidSynth
 import json
 
+
 with open("./song_processing/general_midi_instruments.json") as f:
     GM_PROGRAMS = json.load(f)
 
 with open("./song_processing/songs.json") as f:
     SONGS = json.load(f)
 
-SONG="Never Gonna Give You Up"
+SONG="Bohemian Rhapsody"
 beat_type=1 
 num_sensors=4 
 instrument=-1 
@@ -20,10 +21,8 @@ min_note_duration=0.2
 max_sim_notes=2 
 time_bn_notes=1.
 
-WAVFILE = SONGS[SONG]["title"]+'.wav'
 MIDFILE = SONGS[SONG]["title"]+'.mid'
-with open(WAVFILE, "w") as f:
-    pass
+
 
 
 
@@ -32,12 +31,8 @@ def main():
     
     running = True
     
-    fs= FluidSynth()
-    fs.midi_to_audio(MIDFILE, WAVFILE)
 
-
-    # Load the WAV file
-    pygame.mixer.music.load(WAVFILE) 
+    pygame.mixer.music.load(MIDFILE) 
 
 
     game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)), SONG, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes)
