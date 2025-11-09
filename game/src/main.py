@@ -28,13 +28,11 @@ try:
 except:
     print("error connection to arduino")
 
-OPEN_START_SCREEN = True
-
 def main():
     pygame.init()
     
     running = False
-    if (OPEN_START_SCREEN):
+    if (const.OPEN_START_SCREEN):
         gameConfig = startScreen.invokeStartScreen()
         running = gameConfig["StartGameTrue"]
     else:
