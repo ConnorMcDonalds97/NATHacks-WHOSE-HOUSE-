@@ -43,7 +43,7 @@ def main():
     pygame.mixer.music.load(MIDIFILE) 
 
 
-    game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)), MIDIFILE, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes)
+    game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)), MIDIFILE, beat_type, num_sensors, instrument, gameConfig)
     game.draw()
 
     pygame.mixer.music.play(0,0.0)

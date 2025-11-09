@@ -13,7 +13,7 @@ class Array:
         self.data.append(data)
         
 class Game:
-    def __init__(self, surface, song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes):
+    def __init__(self, surface, song_title, beat_type, num_sensors, instrument, config):
         self.score = 0
         self.multiplier = 1.0
 
@@ -44,7 +44,13 @@ class Game:
         self.tiles3 = Array()
         self.tiles4 = Array()
 
-        self.initTiles(song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes)
+        self.difficulty = config["DifficultyIndex"]
+        if self.difficulty == 0:    #easy
+            self.initTiles(song_title, beat_type, num_sensors, instrument, const.MIN_NOTE_DURATION_MED, const.MAX_SIMULTANEOUS_NOTES_EASY, const.TIME_BETWEEN_NOTES_EASY)
+        elif self.difficulty == 1: # medium
+            self.initTiles(song_title, beat_type, num_sensors, instrument, const.MIN_NOTE_DURATION_MED, const.MAX_SIMULTANEOUS_NOTES_MED, const.TIME_BETWEEN_NOTES_MED)
+        elif self.difficulty == 2: # hard
+            self.initTiles(song_title, beat_type, num_sensors, instrument, const.MIN_NOTE_DURATION_HARD, const.MAX_SIMULTANEOUS_NOTES_HARD, const.TIME_BETWEEN_NOTES_HARD)
 
     def checkTile(self, tile, sensorNum):
         if (tile.getPosition()[1] <= const.SENSOR_Y + 10) and ((tile.getPosition()[1] + tile.getDimensions()[1]) >= const.SENSOR_Y):
