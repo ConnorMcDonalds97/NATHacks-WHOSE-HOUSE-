@@ -13,7 +13,7 @@ class Array:
         self.data.append(data)
         
 class Game:
-    def __init__(self, surface):
+    def __init__(self, surface, song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes):
         self.score = 0
 
         self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
@@ -43,7 +43,7 @@ class Game:
         self.tiles3 = Array()
         self.tiles4 = Array()
 
-        self.initTiles()
+        self.initTiles(song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes)
 
     def checkTile(self, tile, sensorNum):
         if (tile.getPosition()[1] <= const.SENSOR_Y + 10) and ((tile.getPosition()[1] + tile.getDimensions()[1]) >= const.SENSOR_Y):
@@ -125,8 +125,8 @@ class Game:
             update += 1
         print("TILES MOVED PER FRAME:", update)
     
-    def initTiles(self):
-        data = get_beats.return_keys_assignments_and_populate_json("Bohemian Rhapsody", 1, 4, -1)
+    def initTiles(self, song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes):
+        data = get_beats.return_keys_assignments_and_populate_json(song_title=song_title, beat_type=beat_type, num_sensors=num_sensors, instrument=instrument, min_note_duration=min_note_duration, max_simultaneous_notes=max_sim_notes, time_between_notes=time_bn_notes)
 
         for i in range(4):
             for d in data[i]:
