@@ -1,3 +1,6 @@
+import tkinter.filedialog
+
+
 def invokeStartScreen():
     import tkinter
     import const
@@ -5,6 +8,7 @@ def invokeStartScreen():
     TALLYFONT = ("ARIAL", 35)
     CONFIG = {
         "StartGameTrue": False,
+        "SongFile": 'midi_songs\Queen - Bohemian Rhapsody.mid',
         "Finger1": 0,
         "Finger2": 0,
         "Finger3": 0,
@@ -12,7 +16,8 @@ def invokeStartScreen():
     }
 
     def btnSelectSongClicked():
-        pass
+        songPath = tkinter.filedialog.askopenfilename()
+        CONFIG["SongFile"] = songPath
 
     def btnStartGame():
         CONFIG["StartGameTrue"] = True
