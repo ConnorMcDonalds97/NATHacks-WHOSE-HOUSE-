@@ -36,3 +36,8 @@ LIGHT_BLUE = (135, 191, 210)
 
 WHITE = (255,255,255)
 GREY = (99,99,99)
+
+# GAME LOGIC
+
+FLEX_ON=1
+FLEX_OFF=2 #actually since we are only reading flex on and off, we only need one bool.
