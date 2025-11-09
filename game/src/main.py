@@ -1,7 +1,5 @@
 import pygame
-import entities
 import const
-import time
 
 from game import Game
 
@@ -63,17 +61,26 @@ def main():
         #check if tile is below sensor -> if it is then increment front
         f1 = game.tiles1
         if (f1.front <  f1.len) and f1.data[f1.front].pos[1] > const.SCREEN_HEIGHT:
+            if not f1.data[f1.front].checkHit():
+                game.multiplier = 1
             f1.front += 1
         f2 = game.tiles2
         if (f2.front <  f2.len) and f2.data[f2.front].pos[1] > const.SCREEN_HEIGHT:
+            if not f2.data[f2.front].checkHit():
+                game.multiplier = 1
             f2.front += 1
         f3 = game.tiles3
         if (f3.front <  f3.len) and f3.data[f3.front].pos[1] > const.SCREEN_HEIGHT:
+            if not f3.data[f3.front].checkHit():
+                game.multiplier = 1
             f3.front += 1
         f4 = game.tiles4
         if (f4.front <  f4.len) and f4.data[f4.front].pos[1] > const.SCREEN_HEIGHT:
+            if not f4.data[f4.front].checkHit():
+                game.multiplier = 1
             f4.front += 1
-            
+
+        print(game.multiplier)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -90,7 +97,6 @@ def main():
                 if event.key == pygame.K_4:
                     game.sensor4.setColour(const.WHITE)
                     game.checkSensor(4)
-                    # game.sensor.setColour("red")
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_1:
                     game.sensor1.setColour(const.RED)
@@ -101,7 +107,6 @@ def main():
                 if event.key == pygame.K_4:
                     game.sensor4.setColour(const.BLUE)
 
-                    # game.sensor.setColour("white")
         pygame.display.update()
 
     pygame.quit()
