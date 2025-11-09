@@ -13,17 +13,17 @@ class Array:
         self.data.append(data)
         
 class Game:
-    def __init__(self, surface, song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes):
+    def __init__(self, surface, song_title, beat_type, num_sensors, instrument, config):
         self.score = 0
         self.multiplier = 1.0
 
         self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
         self.surface = surface
 
-        self.sensor1 = entities.Tile(0,0, const.RED)
-        self.sensor2 = entities.Tile(0,0, const.GREEN)
-        self.sensor3 = entities.Tile(0,0, const.ORANGE)
-        self.sensor4 = entities.Tile(0,0, const.BLUE)
+        self.sensor1 = entities.Tile(0,0, const.RED, 0)
+        self.sensor2 = entities.Tile(0,0, const.GREEN, 0)
+        self.sensor3 = entities.Tile(0,0, const.ORANGE, 0)
+        self.sensor4 = entities.Tile(0,0, const.BLUE, 0)
 
 
         self.sensor1.setDimensions(const.SENSOR_WIDTH, const.SENSOR_HEIGHT)
@@ -44,7 +44,13 @@ class Game:
         self.tiles3 = Array()
         self.tiles4 = Array()
 
-        self.initTiles(song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes)
+        self.difficulty = config["DifficultyIndex"]
+        if self.difficulty == 0:    #easy
+            self.initTiles(song_title, beat_type, num_sensors, instrument, const.MIN_NOTE_DURATION_MED, const.MAX_SIMULTANEOUS_NOTES_EASY, const.TIME_BETWEEN_NOTES_EASY, const.SPEED_TILES_EASY)
+        elif self.difficulty == 1: # medium
+            self.initTiles(song_title, beat_type, num_sensors, instrument, const.MIN_NOTE_DURATION_MED, const.MAX_SIMULTANEOUS_NOTES_MED, const.TIME_BETWEEN_NOTES_MED, const.SPEED_TILES_MED)
+        elif self.difficulty == 2: # hard
+            self.initTiles(song_title, beat_type, num_sensors, instrument, const.MIN_NOTE_DURATION_HARD, const.MAX_SIMULTANEOUS_NOTES_HARD, const.TIME_BETWEEN_NOTES_HARD, const.SPEED_TILES_HARD)
 
     def getGameState(self):
         if self.tiles1.len > self.tiles1.front:
@@ -145,16 +151,16 @@ class Game:
             update += 1
         print("TILES MOVED PER FRAME:", update)
     
-    def initTiles(self, midifile, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes):
+    def initTiles(self, midifile, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes, speed_tiles):
         data = get_beats.return_keys_assignments_and_populate_json(midifile=midifile, beat_type=beat_type, num_sensors=num_sensors, instrument=instrument, min_note_duration=min_note_duration, max_simultaneous_notes=max_sim_notes, time_between_notes=time_bn_notes)
 
         for i in range(4):
             for d in data[i]:
                 if i == 0:
-                    self.tiles1.append(entities.Tile(const.SPAWN_1, d["start_time"] + 0.5 * d["duration"], const.LIGHT_RED, d['duration']))
+                    self.tiles1.append(entities.Tile(const.SPAWN_1, d["start_time"] + 0.5 * d["duration"], const.LIGHT_RED, d['duration'], speed_tiles))
                 if i == 1:
-                    self.tiles2.append(entities.Tile(const.SPAWN_2, d["start_time"] + 0.5 * d["duration"], const.LIGHT_GREEN, d['duration']))
+                    self.tiles2.append(entities.Tile(const.SPAWN_2, d["start_time"] + 0.5 * d["duration"], const.LIGHT_GREEN, d['duration'], speed_tiles))
                 if i == 2:
-                    self.tiles3.append(entities.Tile(const.SPAWN_3, d["start_time"] + 0.5 * d["duration"], const.LIGHT_ORANGE, d['duration']))
+                    self.tiles3.append(entities.Tile(const.SPAWN_3, d["start_time"] + 0.5 * d["duration"], const.LIGHT_ORANGE, d['duration'], speed_tiles))
                 if i == 3:
-                    self.tiles4.append(entities.Tile(const.SPAWN_4, d["start_time"] + 0.5 * d["duration"], const.LIGHT_BLUE, d['duration']))
+                    self.tiles4.append(entities.Tile(const.SPAWN_4, d["start_time"] + 0.5 * d["duration"], const.LIGHT_BLUE, d['duration'], speed_tiles))
