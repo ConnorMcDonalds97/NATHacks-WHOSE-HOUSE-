@@ -1,5 +1,7 @@
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1080
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 720
+
+IMAGE_ALPHA_RATIO = 1.0
 
 VELOCITY = 500
 
@@ -38,6 +40,6 @@ WHITE = (255,255,255)
 GREY = (99,99,99)
 
 # GAME LOGIC
-OPEN_START_SCREEN = True
+OPEN_START_SCREEN = False
 FLEX_ON=1
 FLEX_OFF=2 #actually since we are only reading flex on and off, we only need one bool.

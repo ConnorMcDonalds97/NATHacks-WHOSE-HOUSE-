@@ -2,6 +2,7 @@ import pygame
 import const
 import entities
 from song_processing import get_beats
+from pathlib import Path
 
 class Array:
     def __init__(self):
@@ -16,8 +17,15 @@ class Game:
     def __init__(self, surface, song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes):
         self.score = 0
         self.multiplier = 1.0
+        self.useBgImage = False
 
+        imagePath = Path(f"Images/{song_title}.png")
         self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
+        if imagePath.exists():
+            self.bgImage = pygame.image.load(f"Images/{song_title}.png").convert()
+            self.bgImage = pygame.transform.scale(self.bgImage, (const.SCREEN_WIDTH, const.SCREEN_HEIGHT))    
+            self.useBgImage = True
+
         self.surface = surface
 
         self.sensor1 = entities.Tile(0,0, const.RED)
@@ -86,7 +94,11 @@ class Game:
             self.multiplier = 1.0
     
     def showBg(self):
-        pygame.draw.rect(self.surface, const.GREY, self.bgRect)
+        if self.useBgImage:
+            self.surface.blit(self.bgImage, (0,0))
+        else:
+            pygame.draw.rect(self.surface, const.GREY, self.bgRect)
+        pass
         
     def showSensor(self):
         pygame.draw.rect(self.surface, self.sensor1.colour, self.sensor1.getRectInfo())

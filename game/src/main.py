@@ -52,13 +52,12 @@ def main():
     dt = 0
     timer = 0
     while running:
+        game.updateTiles(dt)
         game.draw()
 
         dt = clock.tick(60)/1000.0
-
         timer += dt
         
-        game.updateTiles(dt)
         
         #check if tile is below sensor -> if it is then increment front
         f1 = game.tiles1
