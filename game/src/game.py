@@ -2,6 +2,16 @@ import pygame
 import const
 import entities
 from song_processing import get_beats
+
+class Array:
+    def __init__(self):
+        self.front = 0
+        self.data = []
+        self.len = 0
+    def append(self, data):
+        self.len += 1
+        self.data.append(data)
+        
 class Game:
     def __init__(self, surface):
         self.score = 0
@@ -28,10 +38,11 @@ class Game:
 
         self.font = pygame.font.Font('freesansbold.ttf', 32)
 
-        self.tiles1 = []
-        self.tiles2 = []
-        self.tiles3 = []
-        self.tiles4 = []
+        self.tiles1 = Array()
+        self.tiles2 = Array()
+        self.tiles3 = Array()
+        self.tiles4 = Array()
+
         self.initTiles()
 
     def checkTile(self, tile, sensorNum):
@@ -48,19 +59,19 @@ class Game:
         print(f"checking {sensorNum}")
         match sensorNum:
             case 1:
-                for tile in self.tiles1:
+                for tile in self.tiles1.data:
                     if self.checkTile(tile, 1):
                         break
             case 2:
-                for tile in self.tiles2:
+                for tile in self.tiles2.data:
                     if self.checkTile(tile, 2):
                         break
             case 3:
-                for tile in self.tiles3:
+                for tile in self.tiles3.data:
                     if self.checkTile(tile, 3):
                         break
             case 4:
-                for tile in self.tiles4:
+                for tile in self.tiles4.data:
                     if self.checkTile(tile, 4):
                         break
     
@@ -73,19 +84,18 @@ class Game:
         pygame.draw.rect(self.surface, self.sensor3.colour, self.sensor3.getRectInfo())
         pygame.draw.rect(self.surface, self.sensor4.colour, self.sensor4.getRectInfo())
 
-
     def showTiles(self):
-        for tile in self.tiles1:
+        for tile in self.tiles1.data:
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
         
-        for tile in self.tiles2:
+        for tile in self.tiles2.data:
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
-        for tile in self.tiles3:
+        for tile in self.tiles3.data:
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
-        for tile in self.tiles4:
+        for tile in self.tiles4.data:
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
 
@@ -99,10 +109,25 @@ class Game:
         self.showSensor()
         self.showScore()
       
+    def updateTiles(self, dt):
+        update = 0
+        for i in range(self.tiles1.front, self.tiles1.len):
+            self.tiles1.data[i].updatePos(dt)
+            update += 1
+        for i in range(self.tiles2.front, self.tiles2.len):
+            self.tiles2.data[i].updatePos(dt)
+            update += 1
+        for i in range(self.tiles3.front, self.tiles3.len):
+            self.tiles3.data[i].updatePos(dt)
+            update += 1
+        for i in range(self.tiles4.front, self.tiles4.len):
+            self.tiles4.data[i].updatePos(dt)
+            update += 1
+        print("TILES MOVED PER FRAME:", update)
+    
     def initTiles(self):
         data = get_beats.return_keys_assignments_and_populate_json("Bohemian Rhapsody", 1, 4, -1)
 
-        #data = [[{'start_time': 15.384599999999999, 'duration': 0.4166662499999987}],[{'start_time': 15.384599999999999, 'duration': 0.4166662499999987}],[{'start_time': 15.384599999999999, 'duration': 0.4166662499999987}],[{'start_time': 15.384599999999999, 'duration': 0.4166662499999987}]]
         for i in range(4):
             for d in data[i]:
                 if i == 0:

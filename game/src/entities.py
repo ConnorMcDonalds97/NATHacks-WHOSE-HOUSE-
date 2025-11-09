@@ -3,7 +3,7 @@ import const
 class Tile():
     def __init__(self, posX, time, colour, duration = 0.18):
         self.isHit = False
-        self.vel = pygame.Vector2(0,100)
+        self.vel = pygame.Vector2(0,const.VELOCITY)
         self.width = const.TILE_WIDTH
         self.height = const.TILE_HEIGHT * duration
 
