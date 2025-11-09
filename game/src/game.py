@@ -135,8 +135,8 @@ class Game:
             update += 1
         print("TILES MOVED PER FRAME:", update)
     
-    def initTiles(self, song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes):
-        data = get_beats.return_keys_assignments_and_populate_json(song_title=song_title, beat_type=beat_type, num_sensors=num_sensors, instrument=instrument, min_note_duration=min_note_duration, max_simultaneous_notes=max_sim_notes, time_between_notes=time_bn_notes)
+    def initTiles(self, midifile, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes):
+        data = get_beats.return_keys_assignments_and_populate_json(midifile=midifile, beat_type=beat_type, num_sensors=num_sensors, instrument=instrument, min_note_duration=min_note_duration, max_simultaneous_notes=max_sim_notes, time_between_notes=time_bn_notes)
 
         for i in range(4):
             for d in data[i]:

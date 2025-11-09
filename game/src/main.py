@@ -10,10 +10,8 @@ import json
 with open("./song_processing/general_midi_instruments.json") as f:
     GM_PROGRAMS = json.load(f)
 
-with open("./song_processing/songs.json") as f:
-    SONGS = json.load(f)
 
-SONG="Bohemian Rhapsody"
+MIDIFILE="./midi_songs/Guns n Roses - Sweet Child O Mine.mid"
 beat_type=1 
 num_sensors=4 
 instrument=-1 
@@ -21,11 +19,12 @@ min_note_duration=0.2
 max_sim_notes=2 
 time_bn_notes=1.
 
-MIDFILE = SONGS[SONG]["title"]+'.mid'
-
-Ardy = ardy_poll_continuous.ArdyCommie()
-Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
-
+try:
+    Ardy = ardy_poll_continuous.ArdyCommie()
+    Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
+except:
+    print("error connecting to Arduino")
+    pass
 
 def main():
     pygame.init()
@@ -33,10 +32,10 @@ def main():
     running = True
     
 
-    pygame.mixer.music.load(MIDFILE) 
+    pygame.mixer.music.load(MIDIFILE) 
 
 
-    game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)), SONG, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes)
+    game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)), MIDIFILE, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes)
     game.draw()
 
     pygame.mixer.music.play(0,0.0)
@@ -76,15 +75,14 @@ def main():
                 game.multiplier = 1
             f4.front += 1
 
-
-        events_val = Ardy.value #define sequential events from left to right, so that "1234" corresponds to event 1, event 2, ..., event4 
-        event1 = events_val//1000%10 # event 1 is the LEFT MOST VALUE and corresponds to "Key 1" as we had before
-        event2 = events_val//100%10
-        event3= events_val//10%10
-        event4=events_val%10
-
-        ardy_event = 1 #have this for testing purposes rn. ==1 use arduino, ==0 use keys
-
+        
+        ardy_event = 0 #have this for testing purposes rn. ==1 use arduino, ==0 use keys
+        if ardy_event:
+            events_val = Ardy.value #define sequential events from left to right, so that "1234" corresponds to event 1, event 2, ..., event4 
+            event1 = events_val//1000%10 # event 1 is the LEFT MOST VALUE and corresponds to "Key 1" as we had before
+            event2 = events_val//100%10
+            event3= events_val//10%10
+            event4=events_val%10
 
 
         print(game.multiplier)

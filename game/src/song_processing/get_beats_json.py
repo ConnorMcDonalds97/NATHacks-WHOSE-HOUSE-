@@ -11,14 +11,9 @@ import json
 
 import pretty_midi
 
-NGGYU = "Never Gonna Give You Up"
-BR = "Bohemian Rhapsody"
 
 with open("./song_processing/general_midi_instruments.json") as f:
     GM_PROGRAMS = json.load(f)
-
-with open("./song_processing/songs.json") as f:
-    SONGS = json.load(f)
 
 BEATS_DATA_JSON = "./song_processing/beats_data.json"
 
@@ -106,14 +101,13 @@ def get_midi_tempo(mididata):
         json.dump(data, f, indent=2)
     return beats
 
-def return_beat_timestamps(song_name, beat_type, num_sensors=4, instrument=-1, min_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 1.0):
+def return_beat_timestamps(midifile, beat_type, num_sensors=4, instrument=-1, min_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 1.0):
     '''
     get either the bpm of the song or the beat type
     split the beats into num_sensors number of arrays, perhaps correlate to pitch?
 
     TODO: how many beats 
     '''
-    midifile = SONGS[song_name]["title"]+'.mid'
 
     midi_data = pretty_midi.PrettyMIDI(midifile)
     match beat_type:
@@ -123,4 +117,4 @@ def return_beat_timestamps(song_name, beat_type, num_sensors=4, instrument=-1, m
             get_midi_tempo(mididata=midi_data)
 
 if __name__ == "__main__":
-    return_beat_timestamps(song_name= NGGYU, beat_type=1, num_sensors=4, instrument=-1, in_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 3.0)
+    return_beat_timestamps(midifile='./midi_songs/Guns n Roses - Sweet Child O Mine.mid', beat_type=1, num_sensors=4, instrument=-1, in_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 3.0)
