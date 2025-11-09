@@ -13,7 +13,7 @@ class Array:
         self.data.append(data)
         
 class Game:
-    def __init__(self, surface, song_title, beat_type, num_sensors, instrument, config):
+    def __init__(self, surface, song_title, num_sensors, instrument, config):
         self.score = 0
         self.multiplier = 1.0
 
