@@ -46,6 +46,17 @@ class Game:
 
         self.initTiles(song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes)
 
+    def getGameState(self):
+        if self.tiles1.len > self.tiles1.front:
+            return True
+        if self.tiles2.len > self.tiles2.front:
+            return True
+        if self.tiles3.len > self.tiles3.front:
+            return True
+        if self.tiles4.len > self.tiles4.front:
+            return True
+        return False
+
     def checkTile(self, tile, sensorNum):
         if (tile.getPosition()[1] <= const.SENSOR_Y + 10) and ((tile.getPosition()[1] + tile.getDimensions()[1]) >= const.SENSOR_Y):
             if not tile.checkHit():

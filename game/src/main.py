@@ -1,6 +1,5 @@
 import pygame
-
-import entities
+import time
 import const
 from game import Game
 import startScreen
@@ -52,6 +51,8 @@ def main():
 
     dt = 0
     timer = 0
+
+    endTimer = 0
     while running:
         game.draw()
 
@@ -133,7 +134,11 @@ def main():
                         game.sensor3.setColour(const.ORANGE)
                     if event.key == pygame.K_4:
                         game.sensor4.setColour(const.BLUE)
-
+        if not game.getGameState():
+            endTimer += dt
+            if endTimer > 5:
+                running = False
+            
         pygame.display.update()
 
     pygame.quit()
