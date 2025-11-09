@@ -24,6 +24,7 @@ try:
 
     Ardy = ardy_poll_continuous.ArdyCommie()
     Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
+    ardyval=Ardy.value
 except:
     print("error connection to arduino")
 
@@ -85,11 +86,13 @@ def main():
         
         ardy_event = 0 #have this for testing purposes rn. ==1 use arduino, ==0 use keys
         if ardy_event:
-            events_val = Ardy.value #define sequential events from left to right, so that "1234" corresponds to event 1, event 2, ..., event4 
-            event1 = events_val//1000%10 # event 1 is the LEFT MOST VALUE and corresponds to "Key 1" as we had before
-            event2 = events_val//100%10
-            event3= events_val//10%10
-            event4=events_val%10
+            temp=Ardy.value
+            ardyval = temp if temp else ardyval #define sequential events from left to right, so that "1234" corresponds to event 1, event 2, ..., event4 
+            print("EVENTS VALUE:", ardyval)
+            event1 = int(ardyval)//1000%10 # event 1 is the LEFT MOST VALUE and corresponds to "Key 1" as we had before
+            event2 =int( ardyval)//100%10
+            event3= int( ardyval)//10%10
+            event4=int( ardyval)%10
 
 
         print(game.multiplier)
