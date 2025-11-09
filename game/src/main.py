@@ -13,7 +13,6 @@ with open("./song_processing/general_midi_instruments.json") as f:
     GM_PROGRAMS = json.load(f)
 
 
-MIDIFILE="./midi_songs/Guns n Roses - Sweet Child O Mine.mid"
 beat_type=1 
 num_sensors=4 
 instrument=-1 
@@ -37,6 +36,7 @@ def main():
     if (OPEN_START_SCREEN):
         gameConfig = startScreen.invokeStartScreen()
         running = gameConfig["StartGameTrue"]
+        MIDIFILE = "./midi_songs/"+gameConfig["SongFile"]+".mid"
     else:
         running = True
     
