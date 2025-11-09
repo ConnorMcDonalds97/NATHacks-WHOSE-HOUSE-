@@ -2,6 +2,7 @@ import pygame
 import const
 import entities
 from song_processing import get_beats
+import math
 
 class Array:
     def __init__(self):
@@ -14,6 +15,10 @@ class Array:
         
 class Game:
     def __init__(self, surface, song_title, beat_type, num_sensors, instrument, config):
+        self.bgColor = (150, 140, 255) 
+        #bg blue = (120, 200, 255) 
+        #bg purple = (180, 80, 255)
+        
         self.score = 0
         self.multiplier = 1.0
 
@@ -102,8 +107,11 @@ class Game:
         if not hit:
             self.multiplier = 1.0
     
-    def showBg(self):
-        pygame.draw.rect(self.surface, const.GREY, self.bgRect)
+    def showBg(self, time):
+        scal = math.sin(time/10)
+        bgCol = (self.bgColor[0] + scal * -30, self.bgColor[1] + scal * 60, self.bgColor[2])
+        print(self.bgColor)
+        pygame.draw.rect(self.surface, bgCol, self.bgRect)
         
     def showSensor(self):
         pygame.draw.rect(self.surface, self.sensor1.colour, self.sensor1.getRectInfo())
@@ -129,8 +137,8 @@ class Game:
         score = self.font.render(f"Score: {int(self.score)}", True, const.GREEN)
         self.surface.blit(score, ((const.SCREEN_WIDTH / 2) - (score.get_width() / 2), 5))
 
-    def draw(self):
-        self.showBg()
+    def draw(self, time):
+        self.showBg(time)
         self.showTiles()
         self.showSensor()
         self.showScore()

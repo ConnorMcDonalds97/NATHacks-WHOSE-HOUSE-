@@ -2,7 +2,6 @@ import pygame
 import const
 from game import Game
 import startScreen
-
 from hardware import ardy_poll_continuous
 import json
 
@@ -19,7 +18,6 @@ max_sim_notes=2
 time_bn_notes=1.
 
 try:
-
     Ardy = ardy_poll_continuous.ArdyCommie()
     Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
     ardyval=Ardy.value
@@ -42,7 +40,7 @@ def main():
 
 
     game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)), MIDIFILE, beat_type, num_sensors, instrument, gameConfig)
-    game.draw()
+    game.draw(0)
 
     pygame.mixer.music.play(0,0.0)
 
@@ -53,7 +51,7 @@ def main():
 
     endTimer = 0
     while running:
-        game.draw()
+        game.draw(timer)
 
         dt = clock.tick(60)/1000.0
 
