@@ -13,7 +13,7 @@ class Array:
         self.data.append(data)
         
 class Game:
-    def __init__(self, surface, song_title, beat_type, num_sensors, instrument, config):
+    def __init__(self, surface, song_title, num_sensors, instrument, config):
         self.score = 0
         self.multiplier = 1.0
 
@@ -46,11 +46,11 @@ class Game:
 
         self.difficulty = config["DifficultyIndex"]
         if self.difficulty == 0:    #easy
-            self.initTiles(song_title, beat_type, num_sensors, instrument, const.MIN_NOTE_DURATION_MED, const.MAX_SIMULTANEOUS_NOTES_EASY, const.TIME_BETWEEN_NOTES_EASY, const.SPEED_TILES_EASY)
+            self.initTiles(song_title, config["ModeIndex"], num_sensors, instrument, const.MIN_NOTE_DURATION_MED, const.MAX_SIMULTANEOUS_NOTES_EASY, const.TIME_BETWEEN_NOTES_EASY, const.SPEED_TILES_EASY)
         elif self.difficulty == 1: # medium
-            self.initTiles(song_title, beat_type, num_sensors, instrument, const.MIN_NOTE_DURATION_MED, const.MAX_SIMULTANEOUS_NOTES_MED, const.TIME_BETWEEN_NOTES_MED, const.SPEED_TILES_MED)
+            self.initTiles(song_title, config["ModeIndex"], num_sensors, instrument, const.MIN_NOTE_DURATION_MED, const.MAX_SIMULTANEOUS_NOTES_MED, const.TIME_BETWEEN_NOTES_MED, const.SPEED_TILES_MED)
         elif self.difficulty == 2: # hard
-            self.initTiles(song_title, beat_type, num_sensors, instrument, const.MIN_NOTE_DURATION_HARD, const.MAX_SIMULTANEOUS_NOTES_HARD, const.TIME_BETWEEN_NOTES_HARD, const.SPEED_TILES_HARD)
+            self.initTiles(song_title, config["ModeIndex"], num_sensors, instrument, const.MIN_NOTE_DURATION_HARD, const.MAX_SIMULTANEOUS_NOTES_HARD, const.TIME_BETWEEN_NOTES_HARD, const.SPEED_TILES_HARD)
 
     def getGameState(self):
         if self.tiles1.len > self.tiles1.front:
