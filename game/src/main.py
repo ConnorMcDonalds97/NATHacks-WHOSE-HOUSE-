@@ -1,5 +1,4 @@
 import pygame
-import time
 import const
 from game import Game
 import startScreen
