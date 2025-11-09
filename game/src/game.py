@@ -15,7 +15,7 @@ class Array:
 class Game:
     def __init__(self, surface):
         self.score = 0
-        self.multiplier = 1
+        self.multiplier = 1.0
 
         self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
         self.surface = surface
@@ -51,32 +51,39 @@ class Game:
             if not tile.checkHit():
                 tile.setHit()
                 print(f"hit {sensorNum}")
-                self.score += 1 * self.multiplier
-                self.multiplier += 1
+                self.score += 100 * self.multiplier
+                self.multiplier += 0.1
             return True
-        self.multiplier = 1
         return False
 
 
     def checkSensor(self, sensorNum):
         print(f"checking {sensorNum}")
+        hit = False
         match sensorNum:
             case 1:
                 for tile in self.tiles1.data:
                     if self.checkTile(tile, 1):
+                        hit = True
                         break
             case 2:
                 for tile in self.tiles2.data:
                     if self.checkTile(tile, 2):
+                        hit = True
                         break
+
             case 3:
                 for tile in self.tiles3.data:
                     if self.checkTile(tile, 3):
+                        hit = True
                         break
             case 4:
                 for tile in self.tiles4.data:
                     if self.checkTile(tile, 4):
+                        hit = True
                         break
+        if not hit:
+            self.multiplier = 1.0
     
     def showBg(self):
         pygame.draw.rect(self.surface, const.GREY, self.bgRect)
@@ -103,7 +110,7 @@ class Game:
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
 
     def showScore(self):
-        score = self.font.render(f"Score: {self.score}", True, const.GREEN)
+        score = self.font.render(f"Score: {int(self.score)}", True, const.GREEN)
         self.surface.blit(score, ((const.SCREEN_WIDTH / 2) - (score.get_width() / 2), 5))
 
     def draw(self):
