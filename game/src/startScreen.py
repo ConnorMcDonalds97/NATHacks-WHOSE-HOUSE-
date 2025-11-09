@@ -4,11 +4,9 @@ import tkinter
 import const
 
 def invokeStartScreen():
-
-    TALLYFONT = ("ARIAL", 35)
     CONFIG = {
         "StartGameTrue": False,
-        "SongFile": 'midi_songs\Queen - Bohemian Rhapsody.mid',
+        "SongFile": 'Queen - Bohemian Rhapsody',
         "Finger1": 0,
         "Finger2": 0,
         "Finger3": 0,
@@ -21,7 +19,11 @@ def invokeStartScreen():
             initialdir=searchDir,
             filetypes=[("AllFiles", "*.mid")]
             )
-        CONFIG["SongFile"] = songPath
+        if (songPath):
+            songName = os.path.basename(songPath).strip(".mid")
+            songLabelText.set(songName)
+            CONFIG["SongFile"] = songName
+            
 
     def btnStartGame():
         CONFIG["StartGameTrue"] = True
@@ -77,6 +79,10 @@ def invokeStartScreen():
 
     selectSongButton = tkinter.Button(window, text="Select Song", command=btnSelectSongClicked, font=("helvetica", 25))
     selectSongButton.place(x=10, y=350)
+
+    songLabelText = tkinter.StringVar(value=CONFIG["SongFile"])
+    songLabel = tkinter.Label(window, textvariable=songLabelText, font=("Arial", 25))
+    songLabel.place (x=270,y=300)
 
     window.mainloop()
 
