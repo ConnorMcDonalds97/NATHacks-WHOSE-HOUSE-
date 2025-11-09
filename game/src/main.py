@@ -1,6 +1,4 @@
 import pygame
-
-import entities
 import const
 from game import Game
 import startScreen
@@ -21,9 +19,9 @@ max_sim_notes=2
 time_bn_notes=1.
 
 try:
-
     Ardy = ardy_poll_continuous.ArdyCommie()
     Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
+    ardyval=Ardy.value
 except:
     print("error connection to arduino")
 
@@ -42,7 +40,7 @@ def main():
     pygame.mixer.music.load(MIDIFILE) 
 
 
-    game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)), MIDIFILE, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes)
+    game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)), MIDIFILE, num_sensors, instrument, gameConfig)
     game.draw()
 
     pygame.mixer.music.play(0,0.0)
@@ -51,6 +49,8 @@ def main():
 
     dt = 0
     timer = 0
+
+    endTimer = 0
     while running:
         game.draw()
 
@@ -85,27 +85,26 @@ def main():
         
         ardy_event = 0 #have this for testing purposes rn. ==1 use arduino, ==0 use keys
         if ardy_event:
-            events_val = Ardy.value #define sequential events from left to right, so that "1234" corresponds to event 1, event 2, ..., event4 
-            event1 = events_val//1000%10 # event 1 is the LEFT MOST VALUE and corresponds to "Key 1" as we had before
-            event2 = events_val//100%10
-            event3= events_val//10%10
-            event4=events_val%10
+            temp=Ardy.value
+            ardyval = temp if temp else ardyval #define sequential events from left to right, so that "1234" corresponds to event 1, event 2, ..., event4 
+            print("EVENTS VALUE:", ardyval)
+            event1 = int(ardyval)//1000%10 # event 1 is the LEFT MOST VALUE and corresponds to "Key 1" as we had before
+            event2 =int( ardyval)//100%10
+            event3= int( ardyval)//10%10
+            event4=int( ardyval)%10
 
+ 
+            game.sensor1.setColour(const.WHITE) if event1 == const.FLEX_ON else game.sensor1.setColour(const.RED)
+            game.sensor2.setColour(const.WHITE) if event2 == const.FLEX_ON else game.sensor2.setColour(const.GREEN)
+            game.sensor3.setColour(const.WHITE) if event3 == const.FLEX_ON else game.sensor3.setColour(const.ORANGE)
+            game.sensor4.setColour(const.WHITE) if event4 == const.FLEX_ON else game.sensor4.setColour(const.BLUE)
 
         print(game.multiplier)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
-
-            if ardy_event:
- 
-                game.sensor1.setColour(const.WHITE) if event1 == const.FLEX_ON else game.sensor1.setColour(const.RED)
-                game.sensor2.setColour(const.WHITE) if event2 == const.FLEX_ON else game.sensor2.setColour(const.GREEN)
-                game.sensor3.setColour(const.WHITE) if event3 == const.FLEX_ON else game.sensor3.setColour(const.ORANGE)
-                game.sensor4.setColour(const.WHITE) if event4 == const.FLEX_ON else game.sensor4.setColour(const.BLUE)
+                running = False                
                 
-                
-            else: # DEBUGGING PURPOSES! if ardy_event==1, then the arduino sensors, else just use the keyboard keys for convenience.
+            if not ardy_event: # DEBUGGING PURPOSES! if ardy_event==1, then the arduino sensors, else just use the keyboard keys for convenience.
 
                 if event.type == pygame.KEYDOWN:
                     
@@ -130,9 +129,14 @@ def main():
                         game.sensor3.setColour(const.ORANGE)
                     if event.key == pygame.K_4:
                         game.sensor4.setColour(const.BLUE)
-
+        if not game.getGameState():
+            endTimer += dt
+            if endTimer > 5:
+                running = False
+            
         pygame.display.update()
 
     pygame.quit()
+    startScreen.invokeEndScreen(game.score)
 
 main()

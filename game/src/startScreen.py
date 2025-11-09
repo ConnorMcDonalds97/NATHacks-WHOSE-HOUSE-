@@ -2,15 +2,56 @@ import tkinter as tk
 from tkinter import filedialog
 import os
 
+def invokeEndScreen(score):
+    window = tk.Tk()
+    window.geometry("1000x500")
+    window.title("Music Reflex Game")
+
+    main_frame = tk.Frame(window, bg="#0D1E34")
+    main_frame.pack(expand=True, fill="both")
+
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+
+    tk.Label(
+        text=f"Thanks For Playing\nScore: {score}\n\nWhose House? MACS House",
+        font=("Helvetica", int(40 * screen_height / 1000), "bold"),
+        bg="#0D1E34",
+        fg="white",
+    ).place(relx=0.5, rely=0.5, anchor="center")
+
+    window.mainloop()
+
 def invokeStartScreen():
+    DIFFS = ["Easy", "Medium", "Hard"]
+    DIFFSCOLOURS = ["#0DD41E", "#DAED08", "#D40D0D"]
+    MODES = ["Tempo", "Melody"]
     CONFIG = {
         "StartGameTrue": False,
         "SongFile": "Queen - Bohemian Rhapsody",
+        "DifficultyIndex": 0,
+        "ModeIndex": 0,
         "Finger1": 0,
         "Finger2": 0,
         "Finger3": 0,
         "Finger4": 0,
     }
+
+    def btnDifficultyCycle(button):
+        if CONFIG["DifficultyIndex"] >= 2:
+            CONFIG["DifficultyIndex"] = 0
+        else:
+            CONFIG["DifficultyIndex"] += 1
+
+        button.config(text=DIFFS[CONFIG["DifficultyIndex"]], bg=DIFFSCOLOURS[CONFIG["DifficultyIndex"]])
+
+    def btnModeCycle(button):
+        if CONFIG["ModeIndex"] == 1:
+            CONFIG["ModeIndex"] = 0
+        else:
+            CONFIG["ModeIndex"] = 1
+
+        button.config(text=MODES[CONFIG["ModeIndex"]])
 
     def btnSelectSongClicked():
         searchDir = os.path.join(os.getcwd(), "midi_songs")
@@ -86,7 +127,7 @@ def invokeStartScreen():
             variable=var,
             onvalue=1,
             offvalue=0,
-            font=base_font,
+            font=button_font,
             bg="#202020",
             fg="white",
             selectcolor="#303030",
@@ -136,7 +177,35 @@ def invokeStartScreen():
         activebackground="#2ECC71",
         width=15,
         height=2,
-    ).grid(row=2, column=0, columnspan=2, pady=60)
+    ).grid(row=3, column=0, columnspan=2, pady=0)
+
+    # difficulty button
+    difficultyButton = tk.Button(
+        main_frame,
+        text=DIFFS[CONFIG["DifficultyIndex"]],
+        command=lambda: btnDifficultyCycle(difficultyButton),
+        font=button_font,
+        width=12,
+        height=1,
+        bg=DIFFSCOLOURS[CONFIG["DifficultyIndex"]],
+        fg="white",
+        activebackground="#F7F3F3",
+    )
+    difficultyButton.grid(row=2, column=1, columnspan=1, pady=80)
+
+    # mode button (melody/Tempo)
+    modeButton = tk.Button(
+        main_frame,
+        text=MODES[CONFIG["ModeIndex"]],
+        command=lambda: btnModeCycle(modeButton),
+        font=button_font,
+        width=12,
+        height=1,
+        bg="#404040",
+        fg="white",
+        activebackground="#F7F3F3",
+    )
+    modeButton.grid(row=2, column=0, columnspan=1, pady=80)
 
     window.mainloop()
     print(CONFIG)
@@ -144,4 +213,5 @@ def invokeStartScreen():
 
 
 if __name__ == "__main__":
-    invokeStartScreen()
+    # invokeStartScreen()
+    invokeEndScreen(1000)

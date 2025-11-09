@@ -1,560 +1,302 @@
 [
   {
-    "pitch": 49,
-    "start_time": 14.0625,
-    "end_time": 14.296875,
-    "duration": 0.234375
+    "pitch": 32,
+    "start_time": 0.0,
+    "end_time": 1.3648247625,
+    "duration": 1.3648247625
   },
   {
-    "pitch": 49,
-    "start_time": 17.578125,
-    "end_time": 18.515625,
-    "duration": 0.9375
+    "pitch": 36,
+    "start_time": 1.3851735875,
+    "end_time": 2.758719275,
+    "duration": 1.3735456874999998
   },
   {
-    "pitch": 47,
-    "start_time": 20.625,
-    "end_time": 21.09375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 54,
-    "start_time": 24.140625,
-    "end_time": 24.375,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 49,
-    "start_time": 28.125,
-    "end_time": 28.59375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 31.640625,
-    "end_time": 31.875,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 65,
-    "start_time": 34.921875,
-    "end_time": 35.15625,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 54,
-    "start_time": 37.96875,
-    "end_time": 38.203125,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 49,
-    "start_time": 43.125,
-    "end_time": 43.59375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 46.640625,
-    "end_time": 46.875,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 65,
-    "start_time": 49.921875,
-    "end_time": 50.15625,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 54,
-    "start_time": 52.96875,
-    "end_time": 53.203125,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 49,
-    "start_time": 58.125,
-    "end_time": 58.59375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 61.640625,
-    "end_time": 61.875,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 65,
-    "start_time": 64.921875,
-    "end_time": 65.15625,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 54,
-    "start_time": 67.96875,
-    "end_time": 68.203125,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 49,
-    "start_time": 73.125,
-    "end_time": 73.59375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 44,
-    "start_time": 76.875,
-    "end_time": 77.34375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 80.625,
-    "end_time": 81.328125,
-    "duration": 0.703125
-  },
-  {
-    "pitch": 44,
-    "start_time": 84.375,
-    "end_time": 84.84375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 88.125,
-    "end_time": 90.0,
-    "duration": 1.875
-  },
-  {
-    "pitch": 49,
-    "start_time": 91.40625,
-    "end_time": 91.875,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 56,
-    "start_time": 94.453125,
-    "end_time": 94.921875,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 47,
-    "start_time": 97.5,
-    "end_time": 98.43359375,
-    "duration": 0.93359375
-  },
-  {
-    "pitch": 49,
-    "start_time": 103.125,
-    "end_time": 103.59375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 106.640625,
-    "end_time": 106.875,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 65,
-    "start_time": 109.921875,
-    "end_time": 110.15625,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 54,
-    "start_time": 112.96875,
-    "end_time": 113.203125,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 49,
-    "start_time": 118.125,
-    "end_time": 118.59375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 121.640625,
-    "end_time": 121.875,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 65,
-    "start_time": 124.921875,
-    "end_time": 125.15625,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 54,
-    "start_time": 127.96875,
-    "end_time": 128.203125,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 49,
-    "start_time": 133.125,
-    "end_time": 133.59375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 44,
-    "start_time": 136.875,
-    "end_time": 137.34375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 140.625,
-    "end_time": 141.328125,
-    "duration": 0.703125
-  },
-  {
-    "pitch": 44,
-    "start_time": 144.375,
-    "end_time": 144.84375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 148.125,
-    "end_time": 150.0,
-    "duration": 1.875
-  },
-  {
-    "pitch": 49,
-    "start_time": 151.40625,
-    "end_time": 151.875,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 56,
-    "start_time": 154.453125,
-    "end_time": 154.921875,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 47,
-    "start_time": 157.5,
-    "end_time": 158.43359375,
-    "duration": 0.93359375
-  },
-  {
-    "pitch": 49,
-    "start_time": 163.125,
-    "end_time": 163.59375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 166.640625,
-    "end_time": 166.875,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 65,
-    "start_time": 169.921875,
-    "end_time": 170.15625,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 54,
-    "start_time": 172.96875,
-    "end_time": 173.203125,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 49,
-    "start_time": 178.125,
-    "end_time": 178.59375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 44,
-    "start_time": 181.875,
-    "end_time": 182.34375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 185.625,
-    "end_time": 186.09375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 188.671875,
-    "end_time": 188.90625,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 47,
-    "start_time": 191.953125,
-    "end_time": 193.125,
-    "duration": 1.171875
-  },
-  {
-    "pitch": 49,
-    "start_time": 195.0,
-    "end_time": 195.3125,
-    "duration": 0.3125
-  },
-  {
-    "pitch": 46,
-    "start_time": 198.28125,
-    "end_time": 198.515625,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 49,
-    "start_time": 201.328125,
-    "end_time": 202.265625,
-    "duration": 0.9375
-  },
-  {
-    "pitch": 44,
-    "start_time": 204.375,
-    "end_time": 204.84375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 49,
-    "start_time": 208.125,
-    "end_time": 208.359375,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 50,
-    "start_time": 211.40625,
-    "end_time": 211.875,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 62,
-    "start_time": 211.40625,
-    "end_time": 211.875,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 47,
-    "start_time": 214.453125,
-    "end_time": 215.390625,
-    "duration": 0.9375
-  },
-  {
-    "pitch": 44,
-    "start_time": 217.5,
-    "end_time": 218.203125,
-    "duration": 0.703125
+    "pitch": 37,
+    "start_time": 2.7863355375,
+    "end_time": 4.7066777625,
+    "duration": 1.9203422250000002
   },
   {
     "pitch": 39,
-    "start_time": 221.015625,
-    "end_time": 221.25,
-    "duration": 0.234375
+    "start_time": 4.88281595,
+    "end_time": 5.533508262500001,
+    "duration": 0.6506923125000004
   },
   {
-    "pitch": 46,
-    "start_time": 224.765625,
-    "end_time": 225.0,
-    "duration": 0.234375
+    "pitch": 43,
+    "start_time": 6.2569849500000005,
+    "end_time": 6.877107825,
+    "duration": 0.6201228749999999
   },
   {
-    "pitch": 39,
-    "start_time": 228.515625,
-    "end_time": 228.75,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 46,
-    "start_time": 232.265625,
-    "end_time": 232.5,
-    "duration": 0.234375
+    "pitch": 41,
+    "start_time": 7.6500395125,
+    "end_time": 8.281923412500001,
+    "duration": 0.6318839000000009
   },
   {
     "pitch": 39,
-    "start_time": 236.015625,
-    "end_time": 236.25,
-    "duration": 0.234375
+    "start_time": 9.7382394875,
+    "end_time": 10.96403485,
+    "duration": 1.2257953625000013
   },
   {
-    "pitch": 46,
-    "start_time": 239.765625,
-    "end_time": 240.0,
-    "duration": 0.234375
+    "pitch": 34,
+    "start_time": 11.162893308333334,
+    "end_time": 12.536770012500002,
+    "duration": 1.3738767041666673
+  },
+  {
+    "pitch": 37,
+    "start_time": 12.567471750000001,
+    "end_time": 13.876616404166668,
+    "duration": 1.3091446541666674
+  },
+  {
+    "pitch": 41,
+    "start_time": 13.97794391041667,
+    "end_time": 15.891288981250003,
+    "duration": 1.9133450708333335
+  },
+  {
+    "pitch": 32,
+    "start_time": 16.111032850000004,
+    "end_time": 16.72786182916667,
+    "duration": 0.6168289791666659
+  },
+  {
+    "pitch": 32,
+    "start_time": 17.49866442916667,
+    "end_time": 18.137409941666668,
+    "duration": 0.6387455124999981
+  },
+  {
+    "pitch": 39,
+    "start_time": 19.637645502083334,
+    "end_time": 20.962184220833336,
+    "duration": 1.3245387187500022
+  },
+  {
+    "pitch": 29,
+    "start_time": 21.137508720833335,
+    "end_time": 21.794975595833336,
+    "duration": 0.6574668750000008
+  },
+  {
+    "pitch": 32,
+    "start_time": 22.637383245833334,
+    "end_time": 24.089453508333335,
+    "duration": 1.4520702625000013
+  },
+  {
+    "pitch": 36,
+    "start_time": 24.083553808333335,
+    "end_time": 25.323081095833334,
+    "duration": 1.2395272874999996
+  },
+  {
+    "pitch": 37,
+    "start_time": 25.465527010416668,
+    "end_time": 27.40421421041667,
+    "duration": 1.9386872000000004
+  },
+  {
+    "pitch": 39,
+    "start_time": 27.586962647916668,
+    "end_time": 28.18052957291667,
+    "duration": 0.5935669250000011
+  },
+  {
+    "pitch": 43,
+    "start_time": 28.96969451041667,
+    "end_time": 29.621842510416666,
+    "duration": 0.6521479999999968
+  },
+  {
+    "pitch": 41,
+    "start_time": 30.365698822916666,
+    "end_time": 30.934872635416667,
+    "duration": 0.5691738125000008
+  },
+  {
+    "pitch": 32,
+    "start_time": 33.19385757291666,
+    "end_time": 33.83283722291667,
+    "duration": 0.6389796500000102
+  },
+  {
+    "pitch": 41,
+    "start_time": 35.31442852291668,
+    "end_time": 36.759278954166675,
+    "duration": 1.4448504312499963
+  },
+  {
+    "pitch": 39,
+    "start_time": 36.765258379166674,
+    "end_time": 38.85434544166668,
+    "duration": 2.089087062500006
+  },
+  {
+    "pitch": 39,
+    "start_time": 39.604838354166674,
+    "end_time": 41.66542209375001,
+    "duration": 2.060583739583336
+  },
+  {
+    "pitch": 27,
+    "start_time": 41.81357009375001,
+    "end_time": 42.55580747500001,
+    "duration": 0.7422373812499998
+  },
+  {
+    "pitch": 38,
+    "start_time": 46.90570150833334,
+    "end_time": 48.248723958333336,
+    "duration": 1.3430224499999994
+  },
+  {
+    "pitch": 39,
+    "start_time": 48.289421608333335,
+    "end_time": 49.58593245833333,
+    "duration": 1.296510849999997
+  },
+  {
+    "pitch": 41,
+    "start_time": 49.67895565833334,
+    "end_time": 50.32466960833333,
+    "duration": 0.645713949999994
   },
   {
     "pitch": 44,
-    "start_time": 242.8125,
-    "end_time": 243.02734375,
-    "duration": 0.21484375
+    "start_time": 51.07548858333333,
+    "end_time": 51.760514620833334,
+    "duration": 0.6850260375000019
   },
   {
-    "pitch": 42,
-    "start_time": 246.328125,
-    "end_time": 247.03125,
-    "duration": 0.703125
+    "pitch": 41,
+    "start_time": 52.48012940416667,
+    "end_time": 53.74754365625,
+    "duration": 1.2674142520833342
   },
   {
-    "pitch": 47,
-    "start_time": 249.375,
-    "end_time": 249.84375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 39,
-    "start_time": 252.65625,
-    "end_time": 252.890625,
-    "duration": 0.234375
+    "pitch": 48,
+    "start_time": 53.86199932291667,
+    "end_time": 54.48578270625,
+    "duration": 0.6237833833333326
   },
   {
     "pitch": 44,
-    "start_time": 255.703125,
-    "end_time": 256.40625,
-    "duration": 0.703125
+    "start_time": 55.23546732291667,
+    "end_time": 56.55699758541667,
+    "duration": 1.3215302624999978
   },
   {
     "pitch": 39,
-    "start_time": 258.75,
-    "end_time": 259.453125,
-    "duration": 0.703125
+    "start_time": 57.976868564583334,
+    "end_time": 59.303798693750004,
+    "duration": 1.3269301291666693
   },
   {
-    "pitch": 42,
-    "start_time": 262.03125,
-    "end_time": 262.265625,
-    "duration": 0.234375
+    "pitch": 37,
+    "start_time": 59.36152202708334,
+    "end_time": 60.618701952083335,
+    "duration": 1.2571799249999955
   },
   {
-    "pitch": 47,
-    "start_time": 265.078125,
-    "end_time": 265.1953125,
-    "duration": 0.1171875
+    "pitch": 37,
+    "start_time": 60.73408645208333,
+    "end_time": 62.022029966666665,
+    "duration": 1.2879435145833327
   },
   {
-    "pitch": 42,
-    "start_time": 268.125,
-    "end_time": 268.828125,
-    "duration": 0.703125
+    "pitch": 36,
+    "start_time": 62.11333429166666,
+    "end_time": 63.44128695208333,
+    "duration": 1.3279526604166705
   },
   {
-    "pitch": 44,
-    "start_time": 271.40625,
-    "end_time": 271.640625,
-    "duration": 0.234375
+    "pitch": 36,
+    "start_time": 63.519118225,
+    "end_time": 64.93182925416666,
+    "duration": 1.4127110291666582
   },
   {
-    "pitch": 39,
-    "start_time": 274.453125,
-    "end_time": 274.6875,
-    "duration": 0.234375
+    "pitch": 29,
+    "start_time": 64.93917182708333,
+    "end_time": 66.42871694791666,
+    "duration": 1.489545120833327
   },
   {
-    "pitch": 44,
-    "start_time": 277.5,
-    "end_time": 277.734375,
-    "duration": 0.234375
+    "pitch": 31,
+    "start_time": 67.09392797916665,
+    "end_time": 67.68398558541665,
+    "duration": 0.5900576062499994
   },
   {
-    "pitch": 42,
-    "start_time": 280.78125,
-    "end_time": 281.25,
-    "duration": 0.46875
+    "pitch": 34,
+    "start_time": 68.47870847499999,
+    "end_time": 69.16288159999999,
+    "duration": 0.6841731250000009
   },
   {
-    "pitch": 54,
-    "start_time": 283.828125,
-    "end_time": 284.296875,
-    "duration": 0.46875
+    "pitch": 32,
+    "start_time": 69.87470571249999,
+    "end_time": 70.578552475,
+    "duration": 0.7038467625000067
   },
   {
-    "pitch": 47,
-    "start_time": 287.109375,
-    "end_time": 287.34375,
-    "duration": 0.234375
+    "pitch": 36,
+    "start_time": 71.2733515625,
+    "end_time": 71.88225800416667,
+    "duration": 0.6089064416666758
   },
   {
-    "pitch": 39,
-    "start_time": 290.15625,
-    "end_time": 290.390625,
-    "duration": 0.234375
+    "pitch": 27,
+    "start_time": 72.66873842083334,
+    "end_time": 73.30990702916667,
+    "duration": 0.6411686083333308
   },
   {
-    "pitch": 44,
-    "start_time": 293.4375,
-    "end_time": 293.671875,
-    "duration": 0.234375
+    "pitch": 31,
+    "start_time": 74.0402801375,
+    "end_time": 74.69278679375,
+    "duration": 0.6525066562499973
   },
   {
-    "pitch": 39,
-    "start_time": 296.484375,
-    "end_time": 296.71875,
-    "duration": 0.234375
+    "pitch": 29,
+    "start_time": 75.41836132499999,
+    "end_time": 76.07784391874999,
+    "duration": 0.6594825937499991
   },
   {
-    "pitch": 42,
-    "start_time": 299.5546875,
-    "end_time": 299.765625,
-    "duration": 0.2109375
-  },
-  {
-    "pitch": 47,
-    "start_time": 302.578125,
-    "end_time": 302.8125,
-    "duration": 0.234375
-  },
-  {
-    "pitch": 42,
-    "start_time": 305.625,
-    "end_time": 306.09375,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 44,
-    "start_time": 308.671875,
-    "end_time": 308.90625,
-    "duration": 0.234375
+    "pitch": 32,
+    "start_time": 78.22102312083334,
+    "end_time": 78.86585106666666,
+    "duration": 0.6448279458333275
   },
   {
     "pitch": 39,
-    "start_time": 311.953125,
-    "end_time": 312.421875,
-    "duration": 0.46875
+    "start_time": 79.60997871666666,
+    "end_time": 80.27079149166666,
+    "duration": 0.6608127749999966
   },
   {
-    "pitch": 44,
-    "start_time": 315.0,
-    "end_time": 315.46875,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 42,
-    "start_time": 318.28125,
-    "end_time": 318.75,
-    "duration": 0.46875
-  },
-  {
-    "pitch": 42,
-    "start_time": 321.328125,
-    "end_time": 322.03125,
-    "duration": 0.703125
-  },
-  {
-    "pitch": 51,
-    "start_time": 324.375,
-    "end_time": 324.6875,
-    "duration": 0.3125
+    "pitch": 40,
+    "start_time": 81.03685475833332,
+    "end_time": 81.59244303958333,
+    "duration": 0.5555882812500101
   },
   {
     "pitch": 39,
-    "start_time": 327.421875,
-    "end_time": 327.65625,
-    "duration": 0.234375
+    "start_time": 84.58462348541663,
+    "end_time": 86.65288895208333,
+    "duration": 2.068265466666702
   },
   {
-    "pitch": 47,
-    "start_time": 331.875,
-    "end_time": 332.8125,
-    "duration": 0.9375
+    "pitch": 27,
+    "start_time": 86.88511217916665,
+    "end_time": 87.66593329374999,
+    "duration": 0.7808211145833326
   }
 ]

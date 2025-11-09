@@ -17,7 +17,7 @@ import threading
 
 class ArdyCommie:
     def __init__(self):
-        self.arduino = serial.Serial(port='/dev/cu.usbmodem101', baudrate=115200, timeout=0.1)
+        self.arduino = serial.Serial(port='/dev/ttyACM0', baudrate=115200, timeout=0.1)
         self.value = None
         
     
@@ -27,7 +27,7 @@ class ArdyCommie:
         '''
         while True:
             self.value = self.arduino.readline().decode('utf-8').strip()
-            time.sleep(0.01)
+            time.sleep(0)
 
     def poll_via_thread(self):
         thread = threading.Thread(target=self.poll, daemon=True)

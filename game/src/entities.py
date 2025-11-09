@@ -1,9 +1,9 @@
 import pygame
 import const
 class Tile():
-    def __init__(self, posX, time, colour, duration = 0.18):
+    def __init__(self, posX, time, colour, duration = 0.18, velocity=100):
         self.isHit = False
-        self.vel = pygame.Vector2(0,const.VELOCITY)
+        self.vel = pygame.Vector2(0,velocity)
         self.width = const.TILE_WIDTH
         self.height = const.TILE_HEIGHT * duration
 
@@ -41,6 +41,7 @@ class Tile():
 
     def setHit(self):
         self.isHit = True
+        self.setColour(const.WHITE)
 
     '''
     Updates position based on velocity * deltaTime
