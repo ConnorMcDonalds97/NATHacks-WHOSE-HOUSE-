@@ -21,10 +21,12 @@ min_note_duration=0.2
 max_sim_notes=2 
 time_bn_notes=1.
 
-MIDFILE = SONGS[SONG]["title"]+'.mid'
+try:
 
-Ardy = ardy_poll_continuous.ArdyCommie()
-Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
+    Ardy = ardy_poll_continuous.ArdyCommie()
+    Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
+except:
+    print("error connection to arduino")
 
 OPEN_START_SCREEN = True
 
