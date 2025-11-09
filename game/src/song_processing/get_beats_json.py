@@ -21,10 +21,24 @@ def get_melody_instrument(midi_data_instruments):
     '''
     return: midi_data_instrument
     '''
+    THRESHOLD = 2
+    
     ret_inst = midi_data_instruments[0]
-
+    maxCount = 0
+    
     for inst in midi_data_instruments:
-        pass
+        count = 0
+        notes = inst.notes
+        length = len(notes)
+        for i in range(length):
+            if (i + 1 < length) and abs(notes[i].start - notes[i+1].start) < THRESHOLD:
+                continue
+            count += 1
+            
+        if count > maxCount:
+            maxCount = count
+            ret_inst = inst
+    return ret_inst
 
 
 def get_midi_melody(midi_data, instrument_idx=-1, min_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 1.0):
@@ -45,10 +59,7 @@ def get_midi_melody(midi_data, instrument_idx=-1, min_note_duration = 0.1, max_s
         for inst in midi_data.instruments:
             print(inst.notes)
 
-        melody_instrument = max(
-        [inst for inst in midi_data.instruments if not inst.is_drum],
-        key=lambda inst: len(inst.notes)
-        )
+        melody_instrument = get_melody_instrument(midi_data.instruments)
         '''
         
         '''
@@ -132,7 +143,11 @@ def return_beat_timestamps(midifile, beat_type, num_sensors=4, instrument=-1, mi
             get_midi_tempo(mididata=midi_data)
 
 if __name__ == "__main__":
-    midifile='./midi_songs/Guns n Roses - Sweet Child O Mine.mid'
+    midifile='./midi_songs/Never-Gonna-Give-You-Up-3.mid'
     midi_data = pretty_midi.PrettyMIDI(midifile)
-    get_melody_instrument(midi_data.instruments)
+    print(get_melody_instrument(midi_data.instruments))
+    print(max(
+        [inst for inst in midi_data.instruments if not inst.is_drum],
+        key=lambda inst: len(inst.notes)
+        ))
     # return_beat_timestamps(midifile='./midi_songs/Guns n Roses - Sweet Child O Mine.mid', beat_type=1, num_sensors=4, instrument=-1, min_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 3.0)
