@@ -1,17 +1,24 @@
 import pygame
-import entities
-import const
 import time
 
+import entities
+import const
 from game import Game
+import startScreen
 
 from midi2audio import FluidSynth
 
+OPEN_START_SCREEN = True
 
 def main():
     pygame.init()
     
-    running = True
+    running = False
+    if (OPEN_START_SCREEN):
+        gameConfig = startScreen.invokeStartScreen()
+        running = gameConfig["StartGameTrue"]
+    else:
+        running = True
 
     game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)))
     game.draw()
