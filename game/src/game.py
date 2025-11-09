@@ -98,7 +98,6 @@ class Game:
         for tile in self.tiles1.data:
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
-        
         for tile in self.tiles2.data:
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
