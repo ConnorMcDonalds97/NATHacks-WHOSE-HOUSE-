@@ -13,8 +13,9 @@ class Array:
         self.data.append(data)
         
 class Game:
-    def __init__(self, surface):
+    def __init__(self, surface, song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes):
         self.score = 0
+        self.multiplier = 1.0
 
         self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
         self.surface = surface
@@ -43,37 +44,46 @@ class Game:
         self.tiles3 = Array()
         self.tiles4 = Array()
 
-        self.initTiles()
+        self.initTiles(song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes)
 
     def checkTile(self, tile, sensorNum):
         if (tile.getPosition()[1] <= const.SENSOR_Y + 10) and ((tile.getPosition()[1] + tile.getDimensions()[1]) >= const.SENSOR_Y):
             if not tile.checkHit():
                 tile.setHit()
                 print(f"hit {sensorNum}")
-                self.score += 1
+                self.score += 100 * self.multiplier
+                self.multiplier += 0.1
             return True
         return False
 
 
     def checkSensor(self, sensorNum):
         print(f"checking {sensorNum}")
+        hit = False
         match sensorNum:
             case 1:
                 for tile in self.tiles1.data:
                     if self.checkTile(tile, 1):
+                        hit = True
                         break
             case 2:
                 for tile in self.tiles2.data:
                     if self.checkTile(tile, 2):
+                        hit = True
                         break
+
             case 3:
                 for tile in self.tiles3.data:
                     if self.checkTile(tile, 3):
+                        hit = True
                         break
             case 4:
                 for tile in self.tiles4.data:
                     if self.checkTile(tile, 4):
+                        hit = True
                         break
+        if not hit:
+            self.multiplier = 1.0
     
     def showBg(self):
         pygame.draw.rect(self.surface, const.GREY, self.bgRect)
@@ -100,7 +110,7 @@ class Game:
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
 
     def showScore(self):
-        score = self.font.render(f"Score: {self.score}", True, const.GREEN)
+        score = self.font.render(f"Score: {int(self.score)}", True, const.GREEN)
         self.surface.blit(score, ((const.SCREEN_WIDTH / 2) - (score.get_width() / 2), 5))
 
     def draw(self):
@@ -125,8 +135,8 @@ class Game:
             update += 1
         print("TILES MOVED PER FRAME:", update)
     
-    def initTiles(self):
-        data = get_beats.return_keys_assignments_and_populate_json("Bohemian Rhapsody", 1, 4, -1)
+    def initTiles(self, song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes):
+        data = get_beats.return_keys_assignments_and_populate_json(song_title=song_title, beat_type=beat_type, num_sensors=num_sensors, instrument=instrument, min_note_duration=min_note_duration, max_simultaneous_notes=max_sim_notes, time_between_notes=time_bn_notes)
 
         for i in range(4):
             for d in data[i]:
