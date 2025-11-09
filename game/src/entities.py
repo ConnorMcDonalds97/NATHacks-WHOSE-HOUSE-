@@ -41,6 +41,7 @@ class Tile():
 
     def setHit(self):
         self.isHit = True
+        self.setColour(const.WHITE)
 
     '''
     Updates position based on velocity * deltaTime
