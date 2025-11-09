@@ -14,7 +14,7 @@ def invokeEndScreen(score):
     screen_height = window.winfo_screenheight()
 
     tk.Label(
-        text=f"Thanks For Playing\nScore: {score}\n\nWhose House? MACS House",
+        text=f"Thanks For Playing\nScore: {int(score)}\n\nWhose House? MACS House",
         font=("Helvetica", int(40 * screen_height / 1000), "bold"),
         bg="#0D1E34",
         fg="white",
@@ -25,7 +25,7 @@ def invokeEndScreen(score):
 def invokeStartScreen():
     DIFFS = ["Easy", "Medium", "Hard"]
     DIFFSCOLOURS = ["#0DD41E", "#DAED08", "#D40D0D"]
-    MODES = ["Melody", "Tempo"]
+    MODES = ["Tempo", "Melody"]
     CONFIG = {
         "StartGameTrue": False,
         "SongFile": "Queen - Bohemian Rhapsody",

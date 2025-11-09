@@ -92,21 +92,18 @@ def main():
             event3= int( ardyval)//10%10
             event4=int( ardyval)%10
 
+ 
+            game.sensor1.setColour(const.WHITE) if event1 == const.FLEX_ON else game.sensor1.setColour(const.RED)
+            game.sensor2.setColour(const.WHITE) if event2 == const.FLEX_ON else game.sensor2.setColour(const.GREEN)
+            game.sensor3.setColour(const.WHITE) if event3 == const.FLEX_ON else game.sensor3.setColour(const.ORANGE)
+            game.sensor4.setColour(const.WHITE) if event4 == const.FLEX_ON else game.sensor4.setColour(const.BLUE)
 
         print(game.multiplier)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
-
-            if ardy_event:
- 
-                game.sensor1.setColour(const.WHITE) if event1 == const.FLEX_ON else game.sensor1.setColour(const.RED)
-                game.sensor2.setColour(const.WHITE) if event2 == const.FLEX_ON else game.sensor2.setColour(const.GREEN)
-                game.sensor3.setColour(const.WHITE) if event3 == const.FLEX_ON else game.sensor3.setColour(const.ORANGE)
-                game.sensor4.setColour(const.WHITE) if event4 == const.FLEX_ON else game.sensor4.setColour(const.BLUE)
+                running = False                
                 
-                
-            else: # DEBUGGING PURPOSES! if ardy_event==1, then the arduino sensors, else just use the keyboard keys for convenience.
+            if not ardy_event: # DEBUGGING PURPOSES! if ardy_event==1, then the arduino sensors, else just use the keyboard keys for convenience.
 
                 if event.type == pygame.KEYDOWN:
                     
