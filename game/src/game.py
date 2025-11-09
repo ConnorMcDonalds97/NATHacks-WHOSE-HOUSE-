@@ -15,6 +15,7 @@ class Array:
 class Game:
     def __init__(self, surface):
         self.score = 0
+        self.multiplier = 1
 
         self.bgRect = (0,0, const.SCREEN_WIDTH, const.SCREEN_HEIGHT) #x,y,width,height
         self.surface = surface
@@ -50,8 +51,10 @@ class Game:
             if not tile.checkHit():
                 tile.setHit()
                 print(f"hit {sensorNum}")
-                self.score += 1
+                self.score += 1 * self.multiplier
+                self.multiplier += 1
             return True
+        self.multiplier = 1
         return False
 
 

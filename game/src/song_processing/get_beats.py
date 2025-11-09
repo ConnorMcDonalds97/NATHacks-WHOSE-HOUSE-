@@ -1,7 +1,7 @@
 '''
 TO BE INVOKED IN THE PYGAME SCRIPT!
 '''
-from assign_data_to_keys import *
+from ./assign_data_to_keys import *
 from  get_beats_json import *
 
 def return_keys_assignments_and_populate_json(song_title, beat_type, num_sensors=4, instrument=-1, min_note_duration=0.2, max_simultaneous_notes=2, time_between_notes=2):
