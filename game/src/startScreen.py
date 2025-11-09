@@ -2,11 +2,6 @@ import tkinter as tk
 from tkinter import filedialog
 import os
 
-from flask import Config
-from numpy import diff
-
-
-
 def invokeStartScreen():
     DIFFS = ["Easy", "Medium", "Hard"]
     DIFFSCOLOURS = ["#0DD41E", "#DAED08", "#D40D0D"]
