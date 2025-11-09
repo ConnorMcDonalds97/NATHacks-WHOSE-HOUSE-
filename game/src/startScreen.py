@@ -2,15 +2,41 @@ import tkinter as tk
 from tkinter import filedialog
 import os
 
+from flask import Config
+from numpy import diff
+
+
+
 def invokeStartScreen():
+    DIFFS = ["Easy", "Medium", "Hard"]
+    DIFFSCOLOURS = ["#0DD41E", "#DAED08", "#D40D0D"]
+    MODES = ["Melody", "Tempo"]
     CONFIG = {
         "StartGameTrue": False,
         "SongFile": "Queen - Bohemian Rhapsody",
+        "DifficultyIndex": 0,
+        "ModeIndex": 0,
         "Finger1": 0,
         "Finger2": 0,
         "Finger3": 0,
         "Finger4": 0,
     }
+
+    def btnDifficultyCycle(button):
+        if CONFIG["DifficultyIndex"] >= 2:
+            CONFIG["DifficultyIndex"] = 0
+        else:
+            CONFIG["DifficultyIndex"] += 1
+
+        button.config(text=DIFFS[CONFIG["DifficultyIndex"]], bg=DIFFSCOLOURS[CONFIG["DifficultyIndex"]])
+
+    def btnModeCycle(button):
+        if CONFIG["ModeIndex"] == 1:
+            CONFIG["ModeIndex"] = 0
+        else:
+            CONFIG["ModeIndex"] = 1
+
+        button.config(text=MODES[CONFIG["ModeIndex"]])
 
     def btnSelectSongClicked():
         searchDir = os.path.join(os.getcwd(), "midi_songs")
@@ -86,7 +112,7 @@ def invokeStartScreen():
             variable=var,
             onvalue=1,
             offvalue=0,
-            font=base_font,
+            font=button_font,
             bg="#202020",
             fg="white",
             selectcolor="#303030",
@@ -136,7 +162,35 @@ def invokeStartScreen():
         activebackground="#2ECC71",
         width=15,
         height=2,
-    ).grid(row=2, column=0, columnspan=2, pady=60)
+    ).grid(row=3, column=0, columnspan=2, pady=0)
+
+    # difficulty button
+    difficultyButton = tk.Button(
+        main_frame,
+        text=DIFFS[CONFIG["DifficultyIndex"]],
+        command=lambda: btnDifficultyCycle(difficultyButton),
+        font=button_font,
+        width=12,
+        height=1,
+        bg=DIFFSCOLOURS[CONFIG["DifficultyIndex"]],
+        fg="white",
+        activebackground="#F7F3F3",
+    )
+    difficultyButton.grid(row=2, column=1, columnspan=1, pady=80)
+
+    # mode button (melody/Tempo)
+    modeButton = tk.Button(
+        main_frame,
+        text=MODES[CONFIG["ModeIndex"]],
+        command=lambda: btnModeCycle(modeButton),
+        font=button_font,
+        width=12,
+        height=1,
+        bg="#404040",
+        fg="white",
+        activebackground="#F7F3F3",
+    )
+    modeButton.grid(row=2, column=0, columnspan=1, pady=80)
 
     window.mainloop()
     print(CONFIG)
