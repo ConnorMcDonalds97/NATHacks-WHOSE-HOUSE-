@@ -1,7 +1,9 @@
 import pygame
-import const
 
+import entities
+import const
 from game import Game
+import startScreen
 
 from hardware import ardy_poll_continuous
 import json
@@ -19,17 +21,22 @@ min_note_duration=0.2
 max_sim_notes=2 
 time_bn_notes=1.
 
-try:
-    Ardy = ardy_poll_continuous.ArdyCommie()
-    Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
-except:
-    print("error connecting to Arduino")
-    pass
+MIDFILE = SONGS[SONG]["title"]+'.mid'
+
+Ardy = ardy_poll_continuous.ArdyCommie()
+Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
+
+OPEN_START_SCREEN = True
 
 def main():
     pygame.init()
     
-    running = True
+    running = False
+    if (OPEN_START_SCREEN):
+        gameConfig = startScreen.invokeStartScreen()
+        running = gameConfig["StartGameTrue"]
+    else:
+        running = True
     
 
     pygame.mixer.music.load(MIDIFILE) 
