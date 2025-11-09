@@ -2,7 +2,6 @@ import pygame
 import const
 from game import Game
 import startScreen
-
 from hardware import ardy_poll_continuous
 import json
 
@@ -40,8 +39,8 @@ def main():
     pygame.mixer.music.load(MIDIFILE) 
 
 
-    game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)), MIDIFILE, num_sensors, instrument, gameConfig)
-    game.draw()
+    game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)), MIDIFILE, beat_type, num_sensors, instrument, gameConfig)
+    game.draw(0)
 
     pygame.mixer.music.play(0,0.0)
 
@@ -52,7 +51,7 @@ def main():
 
     endTimer = 0
     while running:
-        game.draw()
+        game.draw(timer)
 
         dt = clock.tick(60)/1000.0
 
