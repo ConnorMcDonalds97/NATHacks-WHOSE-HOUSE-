@@ -40,61 +40,96 @@ def get_melody_instrument(midi_data_instruments):
             ret_inst = inst
     return ret_inst
 
+def highest_velocity(midi_data, min_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 1.0):
+
+    all_notes=[]
+    for inst in midi_data.instruments:
+        for note in inst.notes:
+            all_notes.append(note)
+    notes = sorted(all_notes, key=lambda n: n.start)
+
+    # filter OUT short notes
+    notes = [n for n in notes if n.end - n.start >= min_note_duration]
+
+    simplified_notes=[]
+
+    active_notes=[]
+    time_since_last_note=0
+    prevnote = notes[0]
+
+    simplified_notes.append(prevnote)
+    for note in notes[1:]:
+        time_since_last_note=note.start - prevnote.start
+        if time_since_last_note > 0 and time_since_last_note < time_between_notes:
+            pass
+        else:
+            active_notes = [ n for n in active_notes if n.end > note.start]
+            active_notes.append(note)
+            # if too many notes overlap, choose highest pitch
+            if len(active_notes) > max_simultaneous_notes:
+                # sort by pitch (highest-first for melody)
+                active_notes = sorted(active_notes, key=lambda n: n.pitch, reverse=True)[:max_simultaneous_notes] # lambda to sort by pitch
+
+            if note in active_notes:
+                simplified_notes.append(note)
+
+            # perhaps also a var to indicate the time since the most recent
+            # have some amount of time between notes (simultaneous is OK)
+            prevnote = note
+        
+    melody_data = []
+    for note in simplified_notes:
+        melody_data.append({
+        "pitch": note.pitch,
+        "start_time": note.start,
+        "end_time": note.end,
+        "duration": note.end - note.start
+    })
+        
+
+    with open(BEATS_DATA_JSON, "w") as f:
+        json.dump(melody_data, f, indent=2)
+
+    
+
 def piano_roll_melody(midi_data, fs=100):
+    '''
+      {
+    "pitch": 65,
+    "start_time": 5.26768,
+    "end_time": 5.903255000000001,
+    "duration": 0.6355750000000002
+    },
+    '''
 
     # Get combined piano roll from all non-drum instruments
     piano_roll = midi_data.get_piano_roll(fs=fs)  # shape: (128 pitches, time_frames)
 
     # Each pitch row has velocity values across time
     times = np.arange(piano_roll.shape[1]) / fs  # convert frame index to seconds
-    for t in times:
-        # get the active notes which are the highest velocity, and then the highest pitch
 
-
-import pretty_midi
-import numpy as np
-import json
-
-def get_top_velocity_notes(midifile, output_json="topnotes_by_time.json", fs=100):
-    """
-    For each timestep, find the notes with the highest velocity in the piano roll.
-
-    Parameters
-    ----------
-    midifile : str
-        Path to MIDI file.
-    output_json : str
-        Path to save JSON result.
-    fs : int
-        Sampling rate for piano roll (frames per second).
-
-    Returns
-    -------
-    list of dicts
-        Each element has {'time': float, 'pitches': [int]}
-    """
-    midi_data = pretty_midi.PrettyMIDI(midifile)
-    piano_roll = midi_data.get_piano_roll(fs=fs)  # shape (128, T)
-    times = np.arange(piano_roll.shape[1]) / fs
+    duration = times[1]-times[0]
 
     results = []
+
+    # get the active notes which are the highest velocity, and then the highest pitch
     for i, t in enumerate(times):
         velocities = piano_roll[:, i]  # all 128 pitches at this time step
         max_vel = np.max(velocities)
 
         if max_vel > 0:  # if any note is active
             top_pitches = np.where(velocities == max_vel)[0].tolist()
+           
             results.append({
-                "time": float(t),
-                "pitches": [int(p) for p in top_pitches]
+                "pitch": top_pitches[0],
+
+                "start_time":float(t),
+                "duration": duration
+
             })
 
-    # Save to JSON
-    with open(output_json, "w") as f:
+    with open(BEATS_DATA_JSON, "w") as f:
         json.dump(results, f, indent=2)
-
-    print(f"Saved top notes for {len(results)} frames to {output_json}")
-    return results
 
 
 def get_midi_melody(midi_data, instrument_idx=-1, min_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 1.0):
@@ -194,7 +229,8 @@ def return_beat_timestamps(midifile, beat_type, num_sensors=4, instrument=-1, mi
     midi_data = pretty_midi.PrettyMIDI(midifile)
     match beat_type:
         case 1: #melody
-            get_midi_melody(midi_data=midi_data, instrument_idx=instrument, min_note_duration=min_note_duration, max_simultaneous_notes=max_simultaneous_notes, time_between_notes=time_between_notes) #writes to JSON
+            # get_midi_melody(midi_data=midi_data, instrument_idx=instrument, min_note_duration=min_note_duration, max_simultaneous_notes=max_simultaneous_notes, time_between_notes=time_between_notes) #writes to JSON
+            highest_velocity(midi_data)
         case 0: #tempo
             get_midi_tempo(mididata=midi_data)
 
@@ -206,5 +242,5 @@ if __name__ == "__main__":
         [inst for inst in midi_data.instruments if not inst.is_drum],
         key=lambda inst: len(inst.notes)
         ))
-    piano_roll_melody(midi_data)
+    highest_velocity(midi_data)
     # return_beat_timestamps(midifile='./midi_songs/Guns n Roses - Sweet Child O Mine.mid', beat_type=1, num_sensors=4, instrument=-1, min_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 3.0)
