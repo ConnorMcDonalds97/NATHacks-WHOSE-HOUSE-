@@ -6,15 +6,42 @@ import time
 from game import Game
 
 from midi2audio import FluidSynth
+import json
+
+with open("./song_processing/general_midi_instruments.json") as f:
+    GM_PROGRAMS = json.load(f)
+
+with open("./song_processing/songs.json") as f:
+    SONGS = json.load(f)
+
+song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes
+
+SONG = "Never Gonna Give You Up"
+
+WAVFILE = SONGS[SONG]["title"]+'.wav'
+MIDFILE = SONGS[SONG]["title"]+'.mid'
+with open(WAVFILE, "w") as f:
+    pass
+
 
 
 def main():
     pygame.init()
     
     running = True
+    
+    fs= FluidSynth()
+    fs.midi_to_audio(MIDFILE, WAVFILE)
 
-    game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)))
+
+    # Load the WAV file
+    pygame.mixer.music.load(WAVFILE) 
+
+
+    game = Game(pygame.display.set_mode((const.SCREEN_WIDTH, const.SCREEN_HEIGHT)), song_title, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes)
     game.draw()
+
+    pygame.mixer.music.play(0,0.0)
 
     clock = pygame.time.Clock()
 
