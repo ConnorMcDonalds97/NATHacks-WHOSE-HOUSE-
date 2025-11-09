@@ -2,6 +2,26 @@ import tkinter as tk
 from tkinter import filedialog
 import os
 
+def invokeEndScreen(score):
+    window = tk.Tk()
+    window.geometry("1000x500")
+    window.title("Music Reflex Game")
+
+    main_frame = tk.Frame(window, bg="#0D1E34")
+    main_frame.pack(expand=True, fill="both")
+
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+
+    tk.Label(
+        text=f"Thanks For Playing\nScore: {score}\n\nWhose House? MACS House",
+        font=("Helvetica", int(40 * screen_height / 1000), "bold"),
+        bg="#0D1E34",
+        fg="white",
+    ).place(relx=0.5, rely=0.5, anchor="center")
+
+    window.mainloop()
+
 def invokeStartScreen():
     DIFFS = ["Easy", "Medium", "Hard"]
     DIFFSCOLOURS = ["#0DD41E", "#DAED08", "#D40D0D"]
@@ -193,4 +213,5 @@ def invokeStartScreen():
 
 
 if __name__ == "__main__":
-    invokeStartScreen()
+    # invokeStartScreen()
+    invokeEndScreen(1000)

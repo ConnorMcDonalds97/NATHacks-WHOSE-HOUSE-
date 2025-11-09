@@ -134,5 +134,6 @@ def main():
         pygame.display.update()
 
     pygame.quit()
+    startScreen.invokeEndScreen(game.score)
 
 main()
