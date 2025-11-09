@@ -17,6 +17,15 @@ with open("./song_processing/general_midi_instruments.json") as f:
 
 BEATS_DATA_JSON = "./song_processing/beats_data.json"
 
+def get_melody_instrument(midi_data_instruments):
+    '''
+    return: midi_data_instrument
+    '''
+    ret_inst = midi_data_instruments[0]
+
+    for inst in midi_data_instruments:
+        pass
+
 
 def get_midi_melody(midi_data, instrument_idx=-1, min_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 1.0):
     '''
@@ -33,10 +42,16 @@ def get_midi_melody(midi_data, instrument_idx=-1, min_note_duration = 0.1, max_s
             print("No instrument with that program found! Finding the most likely main melody...")
 
     if instrument_idx == -1 or melody_instrument==None:
+        for inst in midi_data.instruments:
+            print(inst.notes)
+
         melody_instrument = max(
         [inst for inst in midi_data.instruments if not inst.is_drum],
         key=lambda inst: len(inst.notes)
         )
+        '''
+        
+        '''
         print(f"Melody likely played by instrument program {melody_instrument.program}")
     
     
@@ -117,4 +132,7 @@ def return_beat_timestamps(midifile, beat_type, num_sensors=4, instrument=-1, mi
             get_midi_tempo(mididata=midi_data)
 
 if __name__ == "__main__":
-    return_beat_timestamps(midifile='./midi_songs/Guns n Roses - Sweet Child O Mine.mid', beat_type=1, num_sensors=4, instrument=-1, in_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 3.0)
+    midifile='./midi_songs/Guns n Roses - Sweet Child O Mine.mid'
+    midi_data = pretty_midi.PrettyMIDI(midifile)
+    get_melody_instrument(midi_data.instruments)
+    # return_beat_timestamps(midifile='./midi_songs/Guns n Roses - Sweet Child O Mine.mid', beat_type=1, num_sensors=4, instrument=-1, min_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 3.0)
