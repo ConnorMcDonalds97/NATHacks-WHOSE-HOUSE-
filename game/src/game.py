@@ -7,6 +7,7 @@ import math
 class Array:
     def __init__(self):
         self.front = 0
+        self.back = 0
         self.data = []
         self.len = 0
     def append(self, data):
@@ -15,10 +16,9 @@ class Array:
         
 class Game:
     def __init__(self, surface, song_title, beat_type, num_sensors, instrument, config):
-        self.bgColor = (150, 140, 255) 
-        #bg blue = (120, 200, 255) 
-        #bg purple = (180, 80, 255)
-        
+        self.bgColor = ((const.COLOR_1[0] + const.COLOR_2[0])/2, (const.COLOR_1[1] + const.COLOR_2[1])/2, (const.COLOR_1[2] + const.COLOR_2[2])/2) 
+        self.bgChange = (const.COLOR_1[0] - const.COLOR_2[0],const.COLOR_1[1] - const.COLOR_2[1],const.COLOR_1[2] - const.COLOR_2[2])
+
         self.score = 0
         self.multiplier = 1.0
 
@@ -74,10 +74,9 @@ class Game:
                 tile.setHit()
                 print(f"hit {sensorNum}")
                 self.score += 100 * self.multiplier
-                self.multiplier += 0.1
+                self.multiplier += 1
             return True
         return False
-
 
     def checkSensor(self, sensorNum):
         print(f"checking {sensorNum}")
@@ -108,9 +107,9 @@ class Game:
             self.multiplier = 1.0
     
     def showBg(self, time):
-        scal = math.sin(time/10)
-        bgCol = (self.bgColor[0] + scal * -30, self.bgColor[1] + scal * 60, self.bgColor[2])
-        print(self.bgColor)
+        scal = math.sin(time/5)
+        bgCol = (clamp(self.bgColor[0] + scal * self.bgChange[0], 255,0), clamp(self.bgColor[1] + scal * self.bgChange[1],255,0), clamp(self.bgColor[2] + scal * self.bgChange[2],255,0))
+        print(bgCol)
         pygame.draw.rect(self.surface, bgCol, self.bgRect)
         
     def showSensor(self):
@@ -120,22 +119,35 @@ class Game:
         pygame.draw.rect(self.surface, self.sensor4.colour, self.sensor4.getRectInfo())
 
     def showTiles(self):
-        for tile in self.tiles1.data:
+        render = 0
+        for i in range(self.tiles1.front, self.tiles1.back):
+            tile = self.tiles1.data[i]
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
-        for tile in self.tiles2.data:
+            render += 1
+        for i in range(self.tiles2.front, self.tiles2.back):
+            tile = self.tiles2.data[i]
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
-        for tile in self.tiles3.data:
+            render += 1
+        for i in range(self.tiles3.front, self.tiles3.back):
+            tile = self.tiles3.data[i]
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
-        for tile in self.tiles4.data:
+            render += 1
+        for i in range(self.tiles4.front, self.tiles4.back):
+            tile = self.tiles4.data[i]
             pos = tile.getPosition()
             pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
+            render += 1
+        print("ATTEMPTED TILE RENDERS:",render) #DEBUG VALUE -> DELETE IN FINAL VERSION
 
     def showScore(self):
         score = self.font.render(f"Score: {int(self.score)}", True, const.GREEN)
+        multiplier = self.font.render(str(int(self.multiplier)), True, const.PURPLE)
+
         self.surface.blit(score, ((const.SCREEN_WIDTH / 2) - (score.get_width() / 2), 5))
+        self.surface.blit(multiplier, ((const.SCREEN_WIDTH/2) - (multiplier.get_width()/2), 10 + score.get_height()))
 
     def draw(self, time):
         self.showBg(time)
@@ -145,19 +157,42 @@ class Game:
       
     def updateTiles(self, dt):
         update = 0
+        found = False
         for i in range(self.tiles1.front, self.tiles1.len):
-            self.tiles1.data[i].updatePos(dt)
+            tile = self.tiles1.data[i]
+            tile.updatePos(dt)
+            if not found and tile.getPosition()[1] < -10 - tile.getDimensions()[1]:
+                found = True
+                self.tiles1.back = i
             update += 1
+
+        found = False
         for i in range(self.tiles2.front, self.tiles2.len):
-            self.tiles2.data[i].updatePos(dt)
+            tile = self.tiles2.data[i]
+            tile.updatePos(dt)
+            if not found and tile.getPosition()[1] < -10 - tile.getDimensions()[1]:
+                found = True
+                self.tiles2.back = i
             update += 1
+
+        found = False
         for i in range(self.tiles3.front, self.tiles3.len):
-            self.tiles3.data[i].updatePos(dt)
+            tile = self.tiles3.data[i]
+            tile.updatePos(dt)
+            if not found and tile.getPosition()[1] < -10 - tile.getDimensions()[1]:
+                found = True
+                self.tiles3.back = i
             update += 1
+    
+        found = False
         for i in range(self.tiles4.front, self.tiles4.len):
-            self.tiles4.data[i].updatePos(dt)
+            tile = self.tiles4.data[i]
+            tile.updatePos(dt)
+            if not found and tile.getPosition()[1] < -10 - tile.getDimensions()[1]:
+                found = True
+                self.tiles3.back = i
             update += 1
-        print("TILES MOVED PER FRAME:", update)
+        print("TILES MOVED PER FRAME:", update) #DEBUG VALUE -> DELETE IN FINAL VERSION
     
     def initTiles(self, midifile, beat_type, num_sensors, instrument, min_note_duration, max_sim_notes, time_bn_notes, speed_tiles):
         data = get_beats.return_keys_assignments_and_populate_json(midifile=midifile, beat_type=beat_type, num_sensors=num_sensors, instrument=instrument, min_note_duration=min_note_duration, max_simultaneous_notes=max_sim_notes, time_between_notes=time_bn_notes)
@@ -172,3 +207,10 @@ class Game:
                     self.tiles3.append(entities.Tile(const.SPAWN_3, d["start_time"] + 0.5 * d["duration"], const.LIGHT_ORANGE, d['duration'], speed_tiles))
                 if i == 3:
                     self.tiles4.append(entities.Tile(const.SPAWN_4, d["start_time"] + 0.5 * d["duration"], const.LIGHT_BLUE, d['duration'], speed_tiles))
+
+def clamp(v1, higher, lower):
+    if v1 > higher:
+        return higher
+    if v1 < lower:
+        return lower
+    return v1

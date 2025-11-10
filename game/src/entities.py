@@ -1,5 +1,6 @@
 import pygame
 import const
+
 class Tile():
     def __init__(self, posX, time, colour, duration = 0.18, velocity=100):
         self.isHit = False
@@ -20,8 +21,6 @@ class Tile():
     def calculateCentreScreenX(self, screenWidth):
         return (screenWidth)/2 - (self.width/2)
     
-
-
     # Setters
     def setColour(self, colour):
         self.colour = colour
@@ -50,7 +49,6 @@ class Tile():
         self.pos += self.vel * deltaTime
 
     # Getters
-
     def getColour(self):
         return self.colour
 
@@ -69,14 +67,3 @@ class Tile():
     def checkHit(self):
         return self.isHit
     
-def main():
-    print("testing tile")
-    tile = Tile(1000,0)
-    print(tile)
-    tile.setPosition(100,100)
-    print(tile.getPosition())
-    tile.setVelocity(5,0)
-    print()
-
-if __name__ == "__main__":
-    main()
