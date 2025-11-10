@@ -41,6 +41,64 @@ def get_melody_instrument(midi_data_instruments):
     return ret_inst
 
 
+def melody_over_all_notes(midi_data, min_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 1.0):
+
+    all_notes=[]
+    for inst in midi_data.instruments:
+        for note in inst.notes:
+            all_notes.append(note)
+    notes = sorted(all_notes, key=lambda n: n.start)
+
+    # filter OUT short notes
+    notes = [n for n in notes if n.end - n.start >= min_note_duration]
+
+    simplified_notes=[]
+
+    active_notes=[]
+    time_since_last_note=0
+    prevnote = notes[0]
+
+    simplified_notes.append(prevnote)
+    for note in notes[1:]:
+        time_since_last_note=note.start - prevnote.start
+        if time_since_last_note > 0 and time_since_last_note < time_between_notes:
+            continue
+        time_since_last_note_ended = note.start-prevnote.end
+        if time_since_last_note_ended < 0.2:
+            continue
+        else:
+            active_notes = [ n for n in active_notes if n.end > note.start]
+            active_notes.append(note)
+            # if too many notes overlap, choose highest pitch
+            if len(active_notes) > max_simultaneous_notes:
+                # sort by pitch (highest-first for melody)
+                active_notes = sorted(active_notes, key=lambda n: n.pitch, reverse=True)[:max_simultaneous_notes] # lambda to sort by pitch
+
+
+            if note in active_notes:
+                simplified_notes.append(note)
+
+            # perhaps also a var to indicate the time since the most recent
+            # have some amount of time between notes (simultaneous is OK)
+            prevnote = note
+        
+    melody_data = []
+    for note in simplified_notes:
+        duration = note.end-note.start
+        if duration < 0.3:
+            duration = 0.5
+        melody_data.append({
+        "pitch": note.pitch,
+        "start_time": note.start,
+        "end_time": note.end,
+        "duration":duration
+    })
+        
+
+    with open(BEATS_DATA_JSON, "w") as f:
+        json.dump(melody_data, f, indent=2)
+
+
 def get_midi_melody(midi_data, instrument_idx=-1, min_note_duration = 0.1, max_simultaneous_notes = 2, time_between_notes = 1.0):
     '''
     instrument_idx is -1 for using pretty midi to choose the most likely melody instrument, and in [0,127] if user manually chooses
@@ -138,7 +196,8 @@ def return_beat_timestamps(midifile, beat_type, num_sensors=4, instrument=-1, mi
     midi_data = pretty_midi.PrettyMIDI(midifile)
     match beat_type:
         case 1: #melody
-            get_midi_melody(midi_data=midi_data, instrument_idx=instrument, min_note_duration=min_note_duration, max_simultaneous_notes=max_simultaneous_notes, time_between_notes=time_between_notes) #writes to JSON
+            # get_midi_melody(midi_data=midi_data, instrument_idx=instrument, min_note_duration=min_note_duration, max_simultaneous_notes=max_simultaneous_notes, time_between_notes=time_between_notes) #writes to JSON
+            melody_over_all_notes(midi_data=midi_data, min_note_duration=min_note_duration, max_simultaneous_notes=max_simultaneous_notes, time_between_notes=time_between_notes)
         case 0: #tempo
             get_midi_tempo(mididata=midi_data)
 
