@@ -61,7 +61,7 @@ def melody_over_all_notes(midi_data, min_note_duration = 0.1, max_simultaneous_n
     simplified_notes.append(prevnote)
     for note in notes[1:]:
         time_since_last_note=note.start - prevnote.start
-        if time_since_last_note > 0 and time_since_last_note < 0.2:
+        if time_since_last_note > 0 and time_since_last_note < time_between_notes:
             continue
         time_since_last_note_ended = note.start-prevnote.end
         if time_since_last_note_ended < 0.2:
@@ -72,7 +72,8 @@ def melody_over_all_notes(midi_data, min_note_duration = 0.1, max_simultaneous_n
             # if too many notes overlap, choose highest pitch
             if len(active_notes) > max_simultaneous_notes:
                 # sort by pitch (highest-first for melody)
-                active_notes = sorted(active_notes, key=lambda n: n.velocity, reverse=True)[:max_simultaneous_notes] # lambda to sort by pitch
+                active_notes = sorted(active_notes, key=lambda n: n.pitch, reverse=True)[:max_simultaneous_notes] # lambda to sort by pitch
+
 
             if note in active_notes:
                 simplified_notes.append(note)
