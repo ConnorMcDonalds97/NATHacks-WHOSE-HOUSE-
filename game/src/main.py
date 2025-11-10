@@ -57,8 +57,8 @@ def main():
         dt = clock.tick(60)/1000.0
 
         timer += dt
-        
-        game.updateTiles(dt)
+
+        game.updateTiles(pygame.mixer.music.get_pos()/1000.0)
         
         #check if tile is below sensor -> if it is then increment front
         f1 = game.tiles1

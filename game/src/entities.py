@@ -11,6 +11,7 @@ class Tile():
         posY = const.SCREEN_HEIGHT - time * self.vel[1]
         
         self.pos = pygame.Vector2(posX,posY)
+        self.originalPos = pygame.Vector2(posX, posY)
         self.colour = colour
 
         self.duration = duration
@@ -45,8 +46,8 @@ class Tile():
     '''
     Updates position based on velocity * deltaTime
     '''
-    def updatePos(self, deltaTime):
-        self.pos += self.vel * deltaTime
+    def updatePos(self, time):
+        self.pos = self.originalPos + self.vel * time
 
     # Getters
     def getColour(self):
