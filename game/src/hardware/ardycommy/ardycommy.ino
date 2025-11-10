@@ -1,19 +1,9 @@
 #include <LiquidCrystal.h>
 
-int checkDepth(int init, int current){ 
-  // Function to deteremine the "strength" of the flex based on how flexed it is relative to it's initial reference point. 
-  int result; 
-
-  result = ceil(current/3);
-
-  result = 4-result;
-  
-  return result; }
-
 
 LiquidCrystal lcd(12,11,7,6,5,4);
 int x;
-unsigned long delay_ = 400UL;
+unsigned long delay_ = 30UL;
 int flexs1 = A0;
 int flexs2 = A1;
 int flexs3 = A2;
@@ -36,32 +26,32 @@ void setup() {
   Serial.begin(115200);
   Serial.setTimeout(1);
 
-  // Read in initial values to set as a reference point
   init1 = analogRead(flexs1);
   init2 = analogRead(flexs2);
   init3 = analogRead(flexs3);
   init4 = analogRead(flexs4);
+
 }
 
 void loop() {
-  output = 4444;
+  output = 2222;
   // put your main code here, to run repeatedly:
   flexdata1 = analogRead(flexs1);
   flexdata2 = analogRead(flexs2);
   flexdata3 = analogRead(flexs3);
   flexdata4 = analogRead(flexs4);
 
-  if (flexdata1 < (init1-5)){
-    output = output - (checkDepth(init1,flexdata1) * 1000);
+  if (flexdata1 > (init1+5)){
+    output = output - 1000;
   }
-  if (flexdata2 <= (init2-4)){
-    output = output - (checkDepth(init2,flexdata2) * 100);
+  if (flexdata2 >= (init2+5)){
+    output = output - 100;
   }
-  if (flexdata3 <= (init3-5)){
-    output = output - (checkDepth(init3,flexdata3) * 10);
+  if (flexdata3 >= (init3+5)){
+    output = output - 10;
   }
-  if (flexdata4 <= (init4-5)){
-    output = output - (checkDepth(init4,flexdata4));
+  if (flexdata4 >= (init4+2)){
+    output = output - 1;
   }
 
   // formatted printing for 4 sensors
