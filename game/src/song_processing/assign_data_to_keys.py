@@ -27,12 +27,17 @@ def get_pitch_categories(mode, n):
     for i in range(n):
         beats_assignments.append([]) #append n empty lists. idx 0 is lowest pitch, idx n-1 is highest
     
+    
+    
     if mode==1: #melody, sort by pitch
+
+    
         pitches = [beat['pitch'] for beat in BEATS]
         lowest_pitch, highest_pitch = min(pitches), max(pitches)
 
         pitch_categories = even_divisions(lowest_pitch, highest_pitch, n)
-        prevbeatidx=None
+        prevbeatidx=None 
+        
         for beat in BEATS[1:]:
             # put each beat['start_time'] with beat['duration'] into the correct category 
             p = beat['pitch']
@@ -42,13 +47,24 @@ def get_pitch_categories(mode, n):
             # find which bin pitch belongs to
             idx = np.digitize(p, pitch_categories) - 1
             idx = max(0, min(idx, n - 1))  # clamp to valid range
-            
+
+
+            lens = [len(b) for b in beats_assignments]
+            max_idx = int(np.argmax(lens))
+            min_idx = int(np.argmin(lens))
+
+            # print(max_idx, min_idx)
+
+
             if prevbeatidx is not None:
                 if prevbeatidx == idx:
                     if prevbeatidx == n-1:
                         idx -=1
                     else:
                         idx+=1
+                    if prevbeatidx == max_idx:
+                        idx = min_idx
+
             
             #just to make sure idx is always valid
             idx = max(0,idx)
@@ -60,8 +76,8 @@ def get_pitch_categories(mode, n):
                 "duration": dur,
                 # "pitch": p
             })
-            prevbeatidx = idx
 
+            prevbeatidx = idx
 
     if mode ==0: #tempo, sort randomly!
         for beat in BEATS:

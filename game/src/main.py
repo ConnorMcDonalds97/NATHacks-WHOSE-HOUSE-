@@ -6,9 +6,10 @@ from hardware import ardy_poll_continuous
 import json
 
 
+import threading
 
-
-def main():
+def gameplay(Ardy):
+    ardyval=2222
     pygame.init()
     
     running = False
@@ -23,13 +24,6 @@ def main():
     max_sim_notes=2 
     time_bn_notes=1.
 
-    try:
-        Ardy = ardy_poll_continuous.ArdyCommie()
-        Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
-        ardyval=Ardy.value
-    except:
-        print("error connection to arduino")
-        ardyval = 2222
 
     if (const.OPEN_START_SCREEN):
         gameConfig = startScreen.invokeStartScreen()
@@ -57,37 +51,47 @@ def main():
         dt = clock.tick(60)/1000.0
 
         timer += dt
-        
-        game.updateTiles(dt)
+
+        game.updateTiles(pygame.mixer.music.get_pos()/1000.0)
         
         #check if tile is below sensor -> if it is then increment front
         f1 = game.tiles1
-        if (f1.front <  f1.len) and f1.data[f1.front].pos[1] > const.SCREEN_HEIGHT:
+        if (f1.front <  f1.len) and f1.data[f1.front].getPosition()[1] > const.SCREEN_HEIGHT:
             if not f1.data[f1.front].checkHit():
                 game.multiplier = 1
             f1.front += 1
         f2 = game.tiles2
-        if (f2.front <  f2.len) and f2.data[f2.front].pos[1] > const.SCREEN_HEIGHT:
+        if (f2.front <  f2.len) and f2.data[f2.front].getPosition()[1] > const.SCREEN_HEIGHT:
             if not f2.data[f2.front].checkHit():
                 game.multiplier = 1
             f2.front += 1
         f3 = game.tiles3
-        if (f3.front <  f3.len) and f3.data[f3.front].pos[1] > const.SCREEN_HEIGHT:
+        if (f3.front <  f3.len) and f3.data[f3.front].getPosition()[1] > const.SCREEN_HEIGHT:
             if not f3.data[f3.front].checkHit():
                 game.multiplier = 1
             f3.front += 1
         f4 = game.tiles4
-        if (f4.front <  f4.len) and f4.data[f4.front].pos[1] > const.SCREEN_HEIGHT:
+        if (f4.front <  f4.len) and f4.data[f4.front].getPosition()[1] > const.SCREEN_HEIGHT:
             if not f4.data[f4.front].checkHit():
                 game.multiplier = 1
             f4.front += 1
 
         
-        ardy_event = 0 #have this for testing purposes rn. ==1 use arduino, ==0 use keys
+        ardy_event = 1 #have this for testing purposes rn. ==1 use arduino, ==0 use keys
         if ardy_event:
             temp=Ardy.value
-            ardyval = temp if temp else ardyval #define sequential events from left to right, so that "1234" corresponds to event 1, event 2, ..., event4 
-            print("EVENTS VALUE:", ardyval)
+            print("TEMP",temp)
+            print("ARDY:", ardyval)
+            if temp is not None and temp != "":
+                ardyval = temp
+
+            # try:
+            #     int(ardyval)
+            # except:
+            #     ardyval=1122
+             #define sequential events from left to right, so that "1234" corresponds to event 1, event 2, ..., event4 
+
+            print("EVENTS VALUE2:", ardyval)
             event1 = int(ardyval)//1000%10 # event 1 is the LEFT MOST VALUE and corresponds to "Key 1" as we had before
             event2 =int( ardyval)//100%10
             event3= int( ardyval)//10%10
@@ -148,7 +152,19 @@ def main():
             
         pygame.display.update()
 
-    startScreen.invokeEndScreen(game.score)
     pygame.quit()
+    startScreen.invokeEndScreen(game.score)
     
+def main():
+
+    try:
+        Ardy = ardy_poll_continuous.ArdyCommie()
+        Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
+    except:
+        print("error connection to arduino")
+
+    gamethread = threading.Thread(target=gameplay, args=(Ardy,))
+
+    gamethread.start()
+
 main()

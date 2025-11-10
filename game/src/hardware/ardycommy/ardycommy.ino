@@ -3,7 +3,7 @@
 
 LiquidCrystal lcd(12,11,7,6,5,4);
 int x;
-unsigned long delay_ = 400UL;
+unsigned long delay_ = 30UL;
 int flexs1 = A0;
 int flexs2 = A1;
 int flexs3 = A2;
@@ -41,16 +41,16 @@ void loop() {
   flexdata3 = analogRead(flexs3);
   flexdata4 = analogRead(flexs4);
 
-  if (flexdata1 < (init1-5)){
+  if (flexdata1 > (init1+5)){
     output = output - 1000;
   }
-  if (flexdata2 <= (init2-4)){
+  if (flexdata2 >= (init2+5)){
     output = output - 100;
   }
-  if (flexdata3 <= (init3-5)){
+  if (flexdata3 >= (init3+5)){
     output = output - 10;
   }
-  if (flexdata4 <= (init4-5)){
+  if (flexdata4 >= (init4+2)){
     output = output - 1;
   }
 
