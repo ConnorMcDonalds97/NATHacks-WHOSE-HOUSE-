@@ -53,7 +53,7 @@ def get_pitch_categories(mode, n):
             max_idx = int(np.argmax(lens))
             min_idx = int(np.argmin(lens))
 
-            print(max_idx, min_idx)
+            # print(max_idx, min_idx)
 
 
             if prevbeatidx is not None:

@@ -6,9 +6,10 @@ from hardware import ardy_poll_continuous
 import json
 
 
+import threading
 
-
-def main():
+def gameplay(Ardy):
+    ardyval=2222
     pygame.init()
     
     running = False
@@ -23,13 +24,6 @@ def main():
     max_sim_notes=2 
     time_bn_notes=1.
 
-    try:
-        Ardy = ardy_poll_continuous.ArdyCommie()
-        Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
-        ardyval=Ardy.value
-    except:
-        print("error connection to arduino")
-        ardyval = 2222
 
     if (const.OPEN_START_SCREEN):
         gameConfig = startScreen.invokeStartScreen()
@@ -83,11 +77,21 @@ def main():
             f4.front += 1
 
         
-        ardy_event = 0 #have this for testing purposes rn. ==1 use arduino, ==0 use keys
+        ardy_event = 1 #have this for testing purposes rn. ==1 use arduino, ==0 use keys
         if ardy_event:
             temp=Ardy.value
-            ardyval = temp if temp else ardyval #define sequential events from left to right, so that "1234" corresponds to event 1, event 2, ..., event4 
-            print("EVENTS VALUE:", ardyval)
+            print("TEMP",temp)
+            print("ARDY:", ardyval)
+            if temp is not None and temp != "":
+                ardyval = temp
+
+            # try:
+            #     int(ardyval)
+            # except:
+            #     ardyval=1122
+             #define sequential events from left to right, so that "1234" corresponds to event 1, event 2, ..., event4 
+
+            print("EVENTS VALUE2:", ardyval)
             event1 = int(ardyval)//1000%10 # event 1 is the LEFT MOST VALUE and corresponds to "Key 1" as we had before
             event2 =int( ardyval)//100%10
             event3= int( ardyval)//10%10
@@ -148,7 +152,19 @@ def main():
             
         pygame.display.update()
 
-    startScreen.invokeEndScreen(game.score)
     pygame.quit()
+    startScreen.invokeEndScreen(game.score)
     
+def main():
+
+    try:
+        Ardy = ardy_poll_continuous.ArdyCommie()
+        Ardy.poll_via_thread() #BEGIN THE ARDUINO POLLING THREAD to continuously read data over serial
+    except:
+        print("error connection to arduino")
+
+    gamethread = threading.Thread(target=gameplay, args=(Ardy,))
+
+    gamethread.start()
+
 main()
