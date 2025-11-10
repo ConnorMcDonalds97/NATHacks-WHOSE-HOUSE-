@@ -109,7 +109,6 @@ class Game:
     def showBg(self, time):
         scal = math.sin(time/5)
         bgCol = (clamp(self.bgColor[0] + scal * self.bgChange[0], 255,0), clamp(self.bgColor[1] + scal * self.bgChange[1],255,0), clamp(self.bgColor[2] + scal * self.bgChange[2],255,0))
-        print(bgCol)
         pygame.draw.rect(self.surface, bgCol, self.bgRect)
         
     def showSensor(self):
@@ -123,22 +122,22 @@ class Game:
         for i in range(self.tiles1.front, self.tiles1.back):
             tile = self.tiles1.data[i]
             pos = tile.getPosition()
-            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
+            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height),border_radius=const.BORDER_RADIUS, )
             render += 1
         for i in range(self.tiles2.front, self.tiles2.back):
             tile = self.tiles2.data[i]
             pos = tile.getPosition()
-            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
+            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height), border_radius=const.BORDER_RADIUS)
             render += 1
         for i in range(self.tiles3.front, self.tiles3.back):
             tile = self.tiles3.data[i]
             pos = tile.getPosition()
-            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
+            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height), border_radius=const.BORDER_RADIUS)
             render += 1
         for i in range(self.tiles4.front, self.tiles4.back):
             tile = self.tiles4.data[i]
             pos = tile.getPosition()
-            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height))
+            pygame.draw.rect(self.surface, tile.colour, (pos[0],pos[1], tile.width, tile.height), border_radius=const.BORDER_RADIUS)
             render += 1
         print("ATTEMPTED TILE RENDERS:",render) #DEBUG VALUE -> DELETE IN FINAL VERSION
 
@@ -190,7 +189,7 @@ class Game:
             tile.updatePos(dt)
             if not found and tile.getPosition()[1] < -10 - tile.getDimensions()[1]:
                 found = True
-                self.tiles3.back = i
+                self.tiles4.back = i
             update += 1
         print("TILES MOVED PER FRAME:", update) #DEBUG VALUE -> DELETE IN FINAL VERSION
     
