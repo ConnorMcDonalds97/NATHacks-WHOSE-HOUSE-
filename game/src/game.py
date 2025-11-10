@@ -190,7 +190,7 @@ class Game:
             tile.updatePos(dt)
             if not found and tile.getPosition()[1] < -10 - tile.getDimensions()[1]:
                 found = True
-                self.tiles3.back = i
+                self.tiles4.back = i
             update += 1
         print("TILES MOVED PER FRAME:", update) #DEBUG VALUE -> DELETE IN FINAL VERSION
     
